@@ -22,11 +22,75 @@
 
 /* Logo */
 .navbar-logo {
-    font-family: 'Sora', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     z-index: 1001;
+    cursor: pointer;
+}
+
+.quantum-core-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    position: relative;
+    cursor: pointer;
+    perspective: 800px;
+}
+
+.qc-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.qc-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: rgba(79, 70, 229, 0.4);
+    border-bottom-color: rgba(6, 182, 212, 0.4);
+    box-sizing: border-box;
+    will-change: transform, border-color;
+}
+
+.qc-ring-1 {
+    width: 100%;
+    height: 100%;
+    border-width: 2px;
+}
+
+.qc-ring-2 {
+    width: 75%;
+    height: 75%;
+    border-top-color: rgba(139, 92, 246, 0.5);
+    border-bottom-color: rgba(56, 189, 248, 0.5);
+    border-width: 1.5px;
+}
+
+.qc-ring-3 {
+    width: 50%;
+    height: 50%;
+    border-top-color: rgba(6, 182, 212, 0.6);
+    border-bottom-color: rgba(168, 85, 247, 0.6);
+    border-width: 1px;
+}
+
+.qc-core {
+    width: 8px;
+    height: 8px;
+    background: var(--text-main);
+    border-radius: 50%;
+    position: absolute;
+    z-index: 10;
+    box-shadow: 0 0 10px 2px rgba(79, 70, 229, 0.3);
+    will-change: transform, opacity, box-shadow, background;
 }
 
 /* Center Menu Glass Pill */

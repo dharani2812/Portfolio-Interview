@@ -64,7 +64,54 @@ const Navbar = () => {
             <div className="navbar-container">
                 {/* Left Side: Logo */}
                 <div className="navbar-logo">
-                    <span>Dharani</span>
+                    <motion.div
+                        className="quantum-core-logo"
+                        whileHover="hover"
+                        initial="initial"
+                        animate="animate"
+                    >
+                        <div className="qc-container">
+                            {/* Outer Ring - Z axis rotation */}
+                            <motion.div
+                                className="qc-ring qc-ring-1"
+                                variants={{
+                                    initial: { rotateZ: 0 },
+                                    animate: { rotateZ: 360, transition: { duration: 8, repeat: Infinity, ease: "linear" } },
+                                    hover: { rotateZ: 180, scale: 1.1, borderColor: "rgba(6, 182, 212, 0.8)", transition: { duration: 0.8, ease: "backOut" } }
+                                }}
+                            />
+
+                            {/* Middle Ring - Y & X axis complex rotation */}
+                            <motion.div
+                                className="qc-ring qc-ring-2"
+                                variants={{
+                                    initial: { rotateX: 60, rotateY: 0 },
+                                    animate: { rotateX: 60, rotateY: 360, transition: { duration: 6, repeat: Infinity, ease: "linear" } },
+                                    hover: { rotateX: 0, rotateY: 0, scale: 1.15, borderColor: "rgba(79, 70, 229, 0.9)", transition: { duration: 0.8, ease: "backOut" } }
+                                }}
+                            />
+
+                            {/* Inner Ring - X & Y axis contrasting rotation */}
+                            <motion.div
+                                className="qc-ring qc-ring-3"
+                                variants={{
+                                    initial: { rotateY: 60, rotateX: 0 },
+                                    animate: { rotateY: 60, rotateX: -360, transition: { duration: 5, repeat: Infinity, ease: "linear" } },
+                                    hover: { rotateY: 0, rotateX: 0, scale: 0.9, borderColor: "rgba(139, 92, 246, 0.9)", transition: { duration: 0.8, ease: "backOut" } }
+                                }}
+                            />
+
+                            {/* Glowing Center Core */}
+                            <motion.div
+                                className="qc-core"
+                                variants={{
+                                    initial: { scale: 0.8, opacity: 0.7 },
+                                    animate: { scale: [0.8, 1, 0.8], opacity: [0.7, 1, 0.7], transition: { duration: 2, repeat: Infinity, ease: "easeInOut" } },
+                                    hover: { scale: 1.5, opacity: 1, boxShadow: "0 0 20px 5px rgba(79, 70, 229, 0.6)", background: "linear-gradient(135deg, #06b6d4, #4f46e5)", transition: { duration: 0.4 } }
+                                }}
+                            />
+                        </div>
+                    </motion.div>
                 </div>
 
                 {/* Center: Glass Menu (Desktop) */}
