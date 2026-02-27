@@ -1,0 +1,246 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 1.5rem 2rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar.scrolled {
+    padding: 1rem 2rem;
+}
+
+.navbar-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Logo */
+.navbar-logo {
+    font-family: 'Sora', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-main);
+    z-index: 1001;
+}
+
+/* Center Menu Glass Pill */
+.navbar-menu-desktop {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.glass-pill {
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 0.6rem 2rem;
+    /* Increased horizontal padding */
+    border-radius: 100px;
+    display: flex;
+    gap: 2rem;
+    /* Increased gap */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+}
+
+.navbar.scrolled .glass-pill {
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.nav-link {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 0.3rem 0.6rem;
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+/* Subtle Vertical Divider */
+.nav-link:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: -1rem;
+    /* Exactly half of the 2rem gap */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 0.8rem;
+    background: rgba(15, 23, 42, 0.1);
+}
+
+/* Link Text Gradient Effect */
+.nav-link-text {
+    background: linear-gradient(90deg, #4f46e5, #06b6d4);
+    background-size: 200% auto;
+    background-position: 100% 0;
+    /* Hidden initially */
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: var(--text-secondary);
+    /* Fallback */
+
+    /* Trick to show solid color initially */
+    /* We use a solid overlay or just manage via background-position */
+    -webkit-text-fill-color: var(--text-secondary);
+    transition: all 0.4s ease;
+}
+
+.nav-link:hover .nav-link-text {
+    -webkit-text-fill-color: transparent;
+    background-position: 0 0;
+}
+
+/* Active Link State */
+.nav-link.active .nav-link-text {
+    -webkit-text-fill-color: transparent;
+    background-position: 0 0;
+}
+
+/* Animated Underline */
+.nav-link-underline {
+    position: absolute;
+    bottom: 0;
+    left: 0.6rem;
+    /* Match padding */
+    width: 0;
+    height: 1.5px;
+    background: #4f46e5;
+    transition: width 0.3s ease-out;
+    border-radius: 2px;
+}
+
+.nav-link:hover .nav-link-underline {
+    width: calc(100% - 1.2rem);
+    left: 0.6rem;
+}
+
+/* Active Underline/Dot */
+.nav-link.active .nav-link-underline {
+    width: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -2px;
+}
+
+/* Right Side Contact Button */
+.btn-contact {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--accent-indigo);
+    text-decoration: none;
+    padding: 0.6rem 1.5rem;
+    border: 1px solid var(--accent-indigo);
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-contact:hover {
+    background: rgba(79, 70, 229, 0.05);
+    transform: translateY(-2px);
+}
+
+/* Mobile Toggle */
+.navbar-mobile-toggle {
+    display: none;
+    z-index: 1001;
+}
+
+.navbar-mobile-toggle button {
+    background: none;
+    border: none;
+    color: var(--text-main);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Mobile Menu Panel */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 4.5rem;
+    left: 1rem;
+    right: 1rem;
+    z-index: 999;
+}
+
+.mobile-menu-glass {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-nav-link {
+    font-family: 'Sora', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.mobile-nav-link.active,
+.mobile-nav-link:active {
+    color: var(--accent-indigo);
+}
+
+.mobile-btn-contact {
+    width: 100%;
+    text-align: center;
+    padding: 1rem;
+    background: var(--accent-indigo);
+    color: white;
+    border-radius: 0.8rem;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 900px) {
+    .navbar {
+        padding: 1rem 1.5rem;
+    }
+
+    .navbar-menu-desktop,
+    .navbar-actions-desktop {
+        display: none;
+    }
+
+    .navbar-mobile-toggle {
+        display: block;
+    }
+
+    /* Disable gradient text on mobile as requested */
+    .mobile-nav-link:hover {
+        background: none;
+        -webkit-text-fill-color: var(--accent-indigo);
+        color: var(--accent-indigo);
+    }
+}

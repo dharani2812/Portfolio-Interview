@@ -1,0 +1,596 @@
+.contact-section {
+    padding: 5rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.contact-label-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.contact-section-label {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.8rem;
+    color: var(--accent-indigo);
+    opacity: 0.6;
+    letter-spacing: 0.2em;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.contact-section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #0f172a;
+    letter-spacing: -0.02em;
+}
+
+/* ==============================
+   TRANSMISSION PANEL
+   ============================== */
+.transmission-panel {
+    background: #0f172a;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(129, 140, 248, 0.08);
+}
+
+/* Subtle Grid Background */
+.tp-grid-overlay {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(129, 140, 248, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(129, 140, 248, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ==============================
+   RADAR PING ANIMATION
+   ============================== */
+.tp-radar {
+    position: absolute;
+    top: 60px;
+    right: -40px;
+    width: 220px;
+    height: 220px;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.35;
+}
+
+.radar-ring {
+    position: absolute;
+    border: 1px solid rgba(129, 140, 248, 0.2);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: radar-expand 3s ease-out infinite;
+}
+
+.radar-ring-1 {
+    animation-delay: 0s;
+}
+
+.radar-ring-2 {
+    animation-delay: 1s;
+}
+
+.radar-ring-3 {
+    animation-delay: 2s;
+}
+
+.radar-center {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: #818cf8;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px rgba(129, 140, 248, 0.5);
+}
+
+@keyframes radar-expand {
+    0% {
+        width: 10px;
+        height: 10px;
+        opacity: 0.8;
+    }
+
+    100% {
+        width: 200px;
+        height: 200px;
+        opacity: 0;
+    }
+}
+
+/* ==============================
+   HEADER BAR
+   ============================== */
+.tp-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    position: relative;
+    z-index: 1;
+}
+
+.tp-signal {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.tp-signal-dot {
+    width: 6px;
+    height: 6px;
+    background: #22c55e;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
+    animation: signal-blink 2s ease-in-out infinite;
+}
+
+@keyframes signal-blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+}
+
+.tp-signal-text {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.6rem;
+    color: #22c55e;
+    letter-spacing: 0.15em;
+    font-weight: 500;
+}
+
+.tp-header-label {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.6rem;
+    color: rgba(255, 255, 255, 0.2);
+    letter-spacing: 0.2em;
+}
+
+/* Live Clock */
+.tp-clock {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.tp-clock-label {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.55rem;
+    color: rgba(255, 255, 255, 0.2);
+    letter-spacing: 0.1em;
+}
+
+.tp-clock-time {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.7rem;
+    color: #818cf8;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    min-width: 65px;
+    text-align: right;
+}
+
+/* ==============================
+   BODY — SPLIT LAYOUT
+   ============================== */
+.tp-body {
+    display: flex;
+    padding: 2.5rem;
+    gap: 3rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* Left Column */
+.tp-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.25rem;
+}
+
+.tp-tagline {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.tp-tag-pre {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.7rem;
+    color: rgba(129, 140, 248, 0.6);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.tp-tag-main {
+    font-family: 'Sora', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #e2e8f0;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.tp-tag-sub {
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.35);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* CTA Button Group */
+.tp-cta-group {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.tp-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'Sora', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #fff;
+    background: var(--accent-indigo);
+    border: 1px solid transparent;
+    border-radius: 12px;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.tp-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.tp-cta:hover {
+    background: #4338ca;
+}
+
+.tp-cta-secondary {
+    background: transparent;
+    border: 1px solid rgba(129, 140, 248, 0.2);
+    color: #818cf8;
+}
+
+.tp-cta-secondary::before {
+    display: none;
+}
+
+.tp-cta-secondary:hover {
+    background: rgba(129, 140, 248, 0.08);
+}
+
+.tp-cta-icon {
+    display: flex;
+    align-items: center;
+}
+
+/* Response Time */
+.tp-response-time {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.tp-rt-label {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.6rem;
+    color: rgba(255, 255, 255, 0.2);
+    letter-spacing: 0.12em;
+}
+
+.tp-rt-value {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.7rem;
+    color: #22c55e;
+    font-weight: 600;
+}
+
+/* ==============================
+   RIGHT — CHANNEL CARDS
+   ============================== */
+.tp-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.tp-channels-label {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.6rem;
+    color: rgba(255, 255, 255, 0.15);
+    letter-spacing: 0.2em;
+    margin-bottom: 0.15rem;
+}
+
+.tp-channels {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.tp-channel-card {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.tp-channel-card:hover {
+    background: rgba(129, 140, 248, 0.06);
+}
+
+.tp-ch-link {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    text-decoration: none;
+    flex: 1;
+    min-width: 0;
+}
+
+.tp-ch-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    background: rgba(129, 140, 248, 0.08);
+    color: #818cf8;
+    flex-shrink: 0;
+    transition: background 0.3s;
+}
+
+.tp-channel-card:hover .tp-ch-icon {
+    background: rgba(129, 140, 248, 0.15);
+}
+
+.tp-ch-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    min-width: 0;
+}
+
+.tp-ch-cmd {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.6rem;
+    color: rgba(129, 140, 248, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.tp-ch-target {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: #e2e8f0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Copy Button */
+.tp-ch-copy {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: all 0.3s;
+    flex-shrink: 0;
+    margin-left: 0.5rem;
+}
+
+.tp-ch-copy:hover {
+    background: rgba(129, 140, 248, 0.1);
+    border-color: rgba(129, 140, 248, 0.2);
+    color: #818cf8;
+}
+
+.tp-ch-copy.copied {
+    border-color: rgba(34, 197, 94, 0.2);
+    background: rgba(34, 197, 94, 0.08);
+}
+
+/* ==============================
+   QUICK MESSAGE FORM
+   ============================== */
+.tp-form-section {
+    margin-top: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.tp-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.tp-input,
+.tp-textarea {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.8rem;
+    color: #e2e8f0;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    padding: 0.65rem 0.9rem;
+    outline: none;
+    transition: border-color 0.3s;
+    resize: none;
+}
+
+.tp-input::placeholder,
+.tp-textarea::placeholder {
+    color: rgba(255, 255, 255, 0.15);
+}
+
+.tp-input:focus,
+.tp-textarea:focus {
+    border-color: rgba(129, 140, 248, 0.3);
+}
+
+.tp-form-submit {
+    font-family: 'Sora', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #818cf8;
+    background: rgba(129, 140, 248, 0.08);
+    border: 1px solid rgba(129, 140, 248, 0.15);
+    border-radius: 10px;
+    padding: 0.6rem 1.25rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: fit-content;
+}
+
+.tp-form-submit:hover {
+    background: rgba(129, 140, 248, 0.15);
+    border-color: rgba(129, 140, 248, 0.3);
+}
+
+.tp-form-submit:disabled {
+    color: #22c55e;
+    border-color: rgba(34, 197, 94, 0.2);
+    background: rgba(34, 197, 94, 0.06);
+    cursor: default;
+}
+
+/* ==============================
+   COPIED TOAST
+   ============================== */
+.tp-toast {
+    position: absolute;
+    bottom: 3.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #1e293b;
+    border: 1px solid rgba(34, 197, 94, 0.15);
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.68rem;
+    color: #22c55e;
+    z-index: 10;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* ==============================
+   FOOTER
+   ============================== */
+.tp-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    position: relative;
+    z-index: 1;
+}
+
+.tp-footer-text {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.6rem;
+    color: rgba(255, 255, 255, 0.45);
+    letter-spacing: 0.08em;
+}
+
+.tp-footer-dot {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.5rem;
+}
+
+/* ==============================
+   MOBILE RESPONSIVE
+   ============================== */
+@media (max-width: 768px) {
+    .contact-section {
+        padding: 3.5rem 1rem;
+    }
+
+    .tp-body {
+        flex-direction: column;
+        padding: 1.75rem;
+        gap: 2rem;
+    }
+
+    .tp-tag-main {
+        font-size: 1.4rem;
+    }
+
+    .tp-left {
+        align-items: center;
+        text-align: center;
+    }
+
+    .tp-cta-group {
+        justify-content: center;
+    }
+
+    .tp-response-time {
+        justify-content: center;
+    }
+
+    .tp-header-label {
+        display: none;
+    }
+
+    .tp-radar {
+        display: none;
+    }
+
+    .tp-channel-card {
+        padding: 0.65rem 0.85rem;
+    }
+}

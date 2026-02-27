@@ -1,0 +1,379 @@
+.skills-section {
+    padding: 4rem 2rem;
+    /* background is transparent to show noise+gradient bg */
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+.skills-container {
+    max-width: 1100px;
+    width: 100%;
+}
+
+.terminals-row {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+}
+
+.terminals-row .terminal-window {
+    flex: 1;
+    min-width: 0;
+}
+
+.skills-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 5rem;
+    text-align: center;
+    color: var(--text-main);
+}
+
+.accent-symbol {
+    color: var(--accent-indigo);
+    margin-right: 0.3rem;
+    font-weight: 400;
+}
+
+/* Terminal Window */
+.terminal-window {
+    background: rgba(15, 23, 42, 0.02);
+    /* Light surfaced background */
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    /* Soft border */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.02);
+}
+
+/* Terminal Header */
+.terminal-header {
+    background: rgba(15, 23, 42, 0.04);
+    padding: 0.8rem 1.5rem;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.terminal-dots {
+    display: flex;
+    gap: 0.6rem;
+}
+
+.dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+}
+
+.dot.close {
+    background: #ff5f57;
+    opacity: 0.8;
+}
+
+.dot.minimize {
+    background: #febc2e;
+    opacity: 0.8;
+}
+
+.dot.expand {
+    background: #28c840;
+    opacity: 0.8;
+}
+
+.terminal-title {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 0.8rem;
+    font-family: 'Sora', sans-serif;
+    color: var(--text-secondary);
+    opacity: 0.6;
+    margin-right: 50px;
+    /* Balance for traffic lights */
+}
+
+/* Terminal Body */
+.terminal-body {
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    /* Large gaps between command groups */
+}
+
+/* Terminal Group */
+.terminal-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+/* Command Line */
+.command-line {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-family: 'Fira Code', monospace;
+    font-size: 1.05rem;
+}
+
+.prompt {
+    color: var(--accent-indigo);
+    font-weight: 600;
+    opacity: 0.9;
+}
+
+.command-text {
+    color: #1f2937;
+    /* Darker monospace command */
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+/* Interaction: Command Hover */
+.terminal-group:hover .command-text {
+    color: var(--accent-indigo);
+}
+
+/* Output Text */
+.output-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    color: #6b7280;
+    /* Lighter gray output */
+    padding-left: 1.8rem;
+    line-height: 1.6;
+    transition: color 0.3s ease;
+}
+
+.terminal-group:hover .output-text {
+    color: #374151;
+    /* Brightens when hovering command group */
+}
+
+/* Blinking Cursor */
+.terminal-cursor {
+    display: inline-block;
+    width: 1.5px;
+    height: 1.2rem;
+    background-color: var(--accent-indigo);
+    animation: terminal-slow-blink 1.2s ease-in-out infinite;
+    vertical-align: middle;
+}
+
+@keyframes terminal-slow-blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .skills-section {
+        padding: 3rem 1.5rem 5rem;
+    }
+
+    .terminals-row {
+        flex-direction: column;
+    }
+
+    .terminal-body {
+        padding: 1.5rem;
+        gap: 2rem;
+    }
+
+    .command-line {
+        font-size: 0.95rem;
+    }
+
+    .output-text {
+        font-size: 0.9rem;
+        padding-left: 1.5rem;
+    }
+
+    .skill-bubbles {
+        display: none;
+    }
+
+    .npm-install-block {
+        padding: 1.25rem;
+    }
+}
+
+/* ==============================
+   FLOATING SKILL BUBBLES
+   ============================== */
+.skill-bubbles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.skill-bubble {
+    position: absolute;
+    left: var(--bx);
+    top: var(--by);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    animation: bubble-drift var(--dur) ease-in-out infinite var(--delay);
+    opacity: 0.35;
+    transition: opacity 0.3s;
+}
+
+.bubble-icon {
+    font-size: 1.5rem;
+    filter: grayscale(0.3);
+}
+
+.bubble-label {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.55rem;
+    color: var(--accent-indigo);
+    opacity: 0.6;
+    letter-spacing: 0.05em;
+}
+
+@keyframes bubble-drift {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    25% {
+        transform: translate(12px, -18px) scale(1.05);
+    }
+
+    50% {
+        transform: translate(-8px, -30px) scale(0.95);
+    }
+
+    75% {
+        transform: translate(15px, -12px) scale(1.02);
+    }
+}
+
+/* ==============================
+   NPM INSTALL TERMINAL
+   ============================== */
+.npm-terminal {
+    margin-top: 0;
+}
+
+.npm-install-block {
+    padding: 1.5rem 2rem;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.82rem;
+}
+
+.npm-cmd-line {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.05);
+}
+
+.npm-cmd {
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+.npm-log {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.npm-log-line {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+}
+
+.npm-added {
+    color: #22c55e;
+    font-weight: 600;
+    font-size: 0.72rem;
+    min-width: 40px;
+}
+
+.npm-pkg-name {
+    color: var(--text-main);
+    font-weight: 500;
+    flex: 1;
+}
+
+.npm-pkg-size {
+    color: var(--text-secondary);
+    opacity: 0.5;
+    font-size: 0.7rem;
+}
+
+.npm-done-line {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(15, 23, 42, 0.05);
+    color: #22c55e;
+    font-weight: 600;
+    font-size: 0.78rem;
+}
+
+.npm-success {
+    font-size: 0.9rem;
+}
+
+.npm-spinner {
+    color: var(--accent-indigo);
+    font-size: 0.9rem;
+    animation: npm-spin 0.6s steps(6) infinite;
+}
+
+@keyframes npm-spin {
+    0% {
+        content: '⠋';
+    }
+
+    16% {
+        content: '⠙';
+    }
+
+    33% {
+        content: '⠹';
+    }
+
+    50% {
+        content: '⠸';
+    }
+
+    66% {
+        content: '⠼';
+    }
+
+    83% {
+        content: '⠴';
+    }
+
+    100% {
+        content: '⠦';
+    }
+}

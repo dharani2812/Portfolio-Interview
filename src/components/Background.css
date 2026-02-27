@@ -1,0 +1,159 @@
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    overflow: hidden;
+    background: linear-gradient(160deg,
+            #f8fafc 0%,
+            #f1f0ff 25%,
+            #f8fafc 50%,
+            #eef7ff 75%,
+            #f8fafc 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ==============================
+   GRADIENT BLOBS
+   ============================== */
+.gradient-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.3;
+    pointer-events: none;
+    will-change: transform;
+}
+
+.blob-1 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(79, 70, 229, 0.15), transparent 70%);
+    top: -5%;
+    right: -5%;
+    animation: blob-drift-1 25s ease-in-out infinite;
+}
+
+.blob-2 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(129, 140, 248, 0.12), transparent 70%);
+    bottom: 10%;
+    left: -5%;
+    animation: blob-drift-2 30s ease-in-out infinite;
+}
+
+.blob-3 {
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(167, 139, 250, 0.1), transparent 70%);
+    top: 40%;
+    left: 50%;
+    animation: blob-drift-3 20s ease-in-out infinite;
+}
+
+@keyframes blob-drift-1 {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    33% {
+        transform: translate(-30px, 40px) scale(1.05);
+    }
+
+    66% {
+        transform: translate(20px, -20px) scale(0.95);
+    }
+}
+
+@keyframes blob-drift-2 {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    33% {
+        transform: translate(40px, -30px) scale(1.08);
+    }
+
+    66% {
+        transform: translate(-20px, 20px) scale(0.92);
+    }
+}
+
+@keyframes blob-drift-3 {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    50% {
+        transform: translate(-35px, -25px) scale(1.1);
+    }
+}
+
+/* ==============================
+   SVG NOISE TEXTURE
+   ============================== */
+.noise-overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.06;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+}
+
+/* ==============================
+   GRID LAYER
+   ============================== */
+.grid-layer {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200vw;
+    height: 200vh;
+    background-image:
+        linear-gradient(rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+    background-size: 50px 50px;
+    perspective: 500px;
+    transform-style: preserve-3d;
+    opacity: 0.5;
+    mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+    -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+}
+
+/* Light Sweep Overlay */
+.light-sweep {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.4) 50%, transparent 70%);
+    background-size: 200% 200%;
+    opacity: 0;
+    mix-blend-mode: soft-light;
+}
+
+/* Vignette */
+.vignette {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: radial-gradient(circle at center, transparent 0%, var(--bg-color) 100%);
+}

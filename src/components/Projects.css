@@ -1,0 +1,1587 @@
+/* Projects Section Container */
+.projects-section {
+    padding: 8rem 2rem;
+    position: relative;
+    /* background is transparent to show noise+gradient bg */
+}
+
+.projects-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Header & Tabs */
+.projects-header {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.section-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    color: var(--accent-indigo);
+    font-weight: 600;
+}
+
+.tabs-container {
+    display: flex;
+    gap: 2rem;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.1);
+    padding-bottom: 0px;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    font-family: 'Sora', sans-serif;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0.5rem 0;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.tab-btn:hover,
+.tab-btn.active {
+    color: var(--text-main);
+}
+
+.tab-underline {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: var(--accent-indigo);
+}
+
+/* Content Area */
+.projects-content {
+    min-height: 500px;
+    /* Prevent layout shift */
+}
+
+/* Project Selector (Internal Tabs) */
+.project-selector {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.05);
+}
+
+.project-tab {
+    background: none;
+    border: none;
+    font-family: 'Sora', sans-serif;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    opacity: 0.7;
+    cursor: pointer;
+    padding: 0.5rem 0;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.project-tab:hover,
+.project-tab.active {
+    color: var(--accent-indigo);
+    opacity: 1;
+}
+
+.project-underline {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: var(--accent-indigo);
+}
+
+/* Full Stack Layout (Split) */
+.fs-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+.fs-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.fs-header-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.fs-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: var(--text-main);
+    line-height: 1.1;
+    margin: 0;
+}
+
+.fs-value {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    max-width: 95%;
+}
+
+.fs-tech-inline {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.85rem;
+    color: var(--accent-indigo);
+    opacity: 0.9;
+}
+
+.fs-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.btn-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.4rem;
+    border-radius: 6px;
+    font-family: 'Sora', sans-serif;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.btn-action.primary {
+    background-color: var(--text-main);
+    color: white;
+}
+
+.btn-action.secondary {
+    border: 1px solid rgba(15, 23, 42, 0.2);
+    color: var(--text-main);
+}
+
+.btn-action:hover {
+    transform: translateY(-2px);
+}
+
+/* Problem / Solution Styles */
+.fs-problem-solution {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(15, 23, 42, 0.05);
+}
+
+.ps-item {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.ps-label {
+    font-weight: 600;
+    color: var(--text-main);
+    margin-right: 0.4rem;
+}
+
+.fs-flow-compact {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    opacity: 0.6;
+    margin-top: 0.5rem;
+}
+
+.flow-step {
+    font-weight: 500;
+}
+
+.flow-arrow {
+    color: var(--accent-indigo);
+    font-size: 0.8rem;
+}
+
+/* Right Side: Visuals */
+.fs-visuals {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.fs-preview {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.06);
+    background-color: white;
+    padding: 0.5rem;
+    border: 1px solid rgba(15, 23, 42, 0.05);
+    line-height: 0;
+    align-self: start;
+}
+
+.preview-frame {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    overflow: visible;
+    position: relative;
+    cursor: default;
+    line-height: 0;
+    perspective: 800px;
+}
+
+.project-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.6s ease;
+}
+
+.preview-frame:hover .project-img {
+    transform: scale(1.02);
+}
+
+/* Features Grid */
+.fs-features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+}
+
+.feature-chip {
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.feature-chip:hover {
+    border-color: var(--accent-indigo);
+    color: var(--accent-indigo);
+    background: white;
+}
+
+/* Frontend Layout (Vertical Stacked Flow) */
+.fe-vertical-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding-top: 2rem;
+}
+
+/* Frontend Zigzag Layout */
+.fe-zigzag-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8rem;
+    /* Generous vertical spacing */
+    padding: 2rem 0;
+}
+
+/* ==========================================================================
+   3D Spotlight Showcase (Frontend Unique Layout)
+   ========================================================================== */
+
+.spotlight-mode {
+    position: relative;
+    padding-top: 1rem;
+}
+
+/* Global Theme Aura - The Dynamic Pulse */
+.fe-theme-aura {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80%;
+    height: 80%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    filter: blur(140px);
+    opacity: 0.08;
+    z-index: -1;
+    pointer-events: none;
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.fe-theme-aura.bento-amber {
+    background: #fbbf24;
+    opacity: 0.12;
+}
+
+.fe-theme-aura.bento-blue {
+    background: #3b82f6;
+    opacity: 0.12;
+}
+
+.fe-theme-aura.bento-violet {
+    background: #8b5cf6;
+    opacity: 0.12;
+}
+
+.fe-theme-aura.bento-emerald {
+    background: #10b981;
+    opacity: 0.12;
+}
+
+/* Filter & View Controls Sync */
+.spotlight-controls {
+    margin-bottom: 5rem;
+    z-index: 10;
+    position: relative;
+    padding: 0 1rem;
+}
+
+.spotlight-controls .view-btn {
+    width: auto;
+    height: 40px;
+    padding: 0 1.25rem;
+    min-width: 120px;
+}
+
+.view-btn-inner {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.view-btn-inner span {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Spotlight Layout Wrapper */
+.fe-spotlight-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    position: relative;
+    z-index: 5;
+}
+
+.fe-spotlight-card {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 4rem;
+    align-items: center;
+    min-height: 500px;
+}
+
+/* 3D Visual & HUD System */
+.fe-spotlight-visual {
+    position: relative;
+    padding: 2rem;
+    perspective: 2000px;
+}
+
+.fe-visual-3d {
+    position: relative;
+    z-index: 2;
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease;
+}
+
+.fe-spotlight-img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.fe-expand-btn {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0f172a;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.fe-expand-btn:hover {
+    transform: scale(1.1);
+    background: white;
+}
+
+/* Technical HUD Overlays */
+.technical-metadata {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+    opacity: 0.5;
+    z-index: 3;
+    letter-spacing: 0.1em;
+}
+
+.technical-metadata.top-left {
+    top: 0;
+    left: 0;
+}
+
+.technical-metadata.bottom-right {
+    bottom: 0;
+    right: 0;
+    text-align: right;
+}
+
+.fe-visual-underglow {
+    position: absolute;
+    inset: 10%;
+    background: var(--tile-glow, transparent);
+    filter: blur(80px);
+    opacity: 0.3;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Spotlight Content & Details */
+.fe-spotlight-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.details-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.fe-category-badge {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.75rem;
+    color: var(--accent-indigo);
+    background: rgba(var(--accent-indigo-rgb, 99, 102, 241), 0.1);
+    padding: 0.3rem 0.8rem;
+    border-radius: 100px;
+    width: fit-content;
+    font-weight: 600;
+}
+
+/* Glitch Title Effect */
+.fe-project-title-glitch {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--text-main);
+    line-height: 1.1;
+    position: relative;
+    cursor: default;
+}
+
+.fe-project-title-glitch::before,
+.fe-project-title-glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+}
+
+.fe-project-title-glitch:hover::before {
+    animation: glitch-anim 0.6s infinite linear alternate-reverse;
+    color: rgba(59, 130, 246, 0.4);
+    z-index: -1;
+}
+
+.fe-project-title-glitch:hover::after {
+    animation: glitch-anim2 0.6s infinite linear alternate-reverse;
+    color: rgba(239, 68, 68, 0.4);
+    z-index: -2;
+}
+
+@keyframes glitch-anim {
+    0% {
+        clip: rect(44px, 450px, 56px, 0);
+    }
+
+    100% {
+        clip: rect(12px, 450px, 34px, 0);
+    }
+}
+
+@keyframes glitch-anim2 {
+    0% {
+        clip: rect(10px, 450px, 20px, 0);
+    }
+
+    100% {
+        clip: rect(60px, 450px, 70px, 0);
+    }
+}
+
+/* Technical Specs Block */
+.technical-specs {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-left: 1.5rem;
+    border-left: 2px solid rgba(0, 0, 0, 0.05);
+}
+
+.spec-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.spec-label {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+    opacity: 0.4;
+    font-weight: 700;
+}
+
+.spec-value {
+    font-size: 0.9rem;
+    color: var(--text-main);
+    font-weight: 500;
+}
+
+.fe-spotlight-desc {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    opacity: 0.9;
+    max-width: 90%;
+}
+
+.fe-spotlight-actions {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.fe-spotlight-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #2d3748;
+    /* DarkSlate, matching user request */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.fe-spotlight-btn:hover {
+    background: #ffffff;
+    color: #0f172a;
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Nav Strip HUD Bar */
+.fe-nav-strip {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.fe-nav-thumb {
+    position: relative;
+    width: 100px;
+    aspect-ratio: 16/9;
+    border: none;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    background: #0f172a;
+    transition: all 0.3s ease;
+}
+
+.fe-nav-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.4;
+    transition: opacity 0.3s ease;
+}
+
+.fe-nav-thumb.active {
+    width: 140px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.fe-nav-thumb.active img,
+.fe-nav-thumb:hover img {
+    opacity: 0.9;
+}
+
+.thumb-indicator {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.fe-nav-thumb.active .thumb-indicator {
+    transform: scaleX(1);
+    background: var(--tile-glow, var(--accent-indigo));
+}
+
+/* Frontend Uniform Grid (Standardized proportions) */
+.fe-uniform-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 420px;
+    /* Fixed height for uniformity */
+    gap: 2rem;
+    padding-bottom: 5rem;
+    width: 100%;
+}
+
+@media (max-width: 1200px) {
+    .fe-uniform-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .fe-uniform-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+    }
+}
+
+.fe-uniform-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.fe-uniform-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+.fe-uniform-card .fe-bento-visual {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    /* Consistent image height */
+    overflow: hidden;
+    cursor: zoom-in;
+}
+
+.fe-bento-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.fe-uniform-card:hover .fe-bento-visual img {
+    transform: scale(1.08);
+}
+
+.fe-bento-overlay {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 2;
+}
+
+.fe-bento-cat {
+    padding: 0.35rem 0.75rem;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(4px);
+    border-radius: 10px;
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--accent-indigo);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.fe-bento-body {
+    padding: 1.25rem 1.5rem;
+    margin: 0;
+    flex-grow: 1;
+}
+
+.fe-uniform-card .bento-title {
+    font-size: 1.15rem;
+    margin-bottom: 0.25rem;
+}
+
+.fe-uniform-card .bento-desc {
+    font-size: 0.85rem;
+    line-clamp: 2;
+}
+
+.fe-uniform-card .bento-footer {
+    padding: 0 1.5rem 1.75rem;
+    /* Increased bottom spacing */
+    margin-top: auto;
+}
+
+.fe-uniform-card.bento-amber:hover {
+    border-color: rgba(251, 191, 36, 0.3);
+}
+
+.fe-uniform-card.bento-blue:hover {
+    border-color: rgba(59, 130, 246, 0.3);
+}
+
+.fe-uniform-card.bento-violet:hover {
+    border-color: rgba(139, 92, 246, 0.3);
+}
+
+.fe-uniform-card.bento-emerald:hover {
+    border-color: rgba(16, 185, 129, 0.3);
+}
+
+/* Action Button Synchronization */
+.fe-uniform-card .fe-grid-actions {
+    display: flex;
+    gap: 1rem;
+    /* Increased spacing between buttons */
+}
+
+/* Reusing spotlight buttons but smaller for grid */
+.fe-spotlight-btn.small {
+    width: 36px;
+    height: 36px;
+    background: rgba(15, 23, 42, 0.05);
+    color: var(--text-secondary);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    box-shadow: none;
+}
+
+.fe-spotlight-btn.small:hover {
+    background: #0f172a;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Spotlight */
+@media (max-width: 1024px) {
+    .fe-spotlight-card {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        min-height: auto;
+    }
+}
+
+/* Frontend Feature Expansion Styles */
+.fe-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.fe-filters {
+    display: flex;
+    gap: 0.75rem;
+    background: rgba(15, 23, 42, 0.03);
+    padding: 0.4rem;
+    border-radius: 14px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.fe-filter-btn {
+    padding: 0.5rem 1.25rem;
+    background: transparent;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.fe-filter-btn:hover {
+    color: var(--text-main);
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.fe-filter-btn.active {
+    background: white;
+    color: var(--accent-indigo);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.fe-view-toggle {
+    display: flex;
+    gap: 0.5rem;
+    background: rgba(15, 23, 42, 0.03);
+    padding: 0.4rem;
+    border-radius: 14px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.view-btn {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    border-radius: 10px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.view-btn:hover {
+    background: rgba(255, 255, 255, 0.5);
+    color: var(--text-main);
+}
+
+.view-btn.active {
+    background: white;
+    color: var(--accent-indigo);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.fe-display-container.zigzag {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+.fe-display-container.grid {
+    display: block;
+    /* Removed conflicting grid layout */
+    width: 100%;
+}
+
+/* Enhanced Project Card - Themed & Adaptive */
+.fe-project-card {
+    position: relative;
+    background: white;
+    border-radius: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Color Sync for Frontend Cards - Mirroring Bento Colors */
+.fe-project-card.bento-amber {
+    background: rgba(251, 191, 36, 0.02);
+}
+
+.fe-project-card.bento-blue {
+    background: rgba(59, 130, 246, 0.02);
+}
+
+.fe-project-card.bento-violet {
+    background: rgba(139, 92, 246, 0.02);
+}
+
+.fe-project-card.bento-emerald {
+    background: rgba(16, 185, 129, 0.02);
+}
+
+.fe-project-card.zigzag {
+    display: flex;
+    align-items: stretch;
+    gap: 3rem;
+    padding: 2.5rem;
+    min-height: 400px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+}
+
+.fe-project-card.zigzag.reverse {
+    flex-direction: row-reverse;
+}
+
+.fe-visual-wrapper {
+    position: relative;
+    flex: 1.2;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    transition: transform 0.5s ease;
+}
+
+.fe-project-card.grid .fe-visual-wrapper {
+    flex: none;
+    aspect-ratio: 16/10;
+    border-radius: 0;
+}
+
+.fe-project-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+    cursor: zoom-in;
+}
+
+.fe-project-card:hover .fe-project-img {
+    transform: scale(1.05);
+}
+
+.fe-expand-trigger {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-main);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.fe-project-card:hover .fe-expand-trigger {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fe-visual-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, var(--tile-glow, transparent), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.fe-project-card:hover .fe-visual-glow {
+    opacity: 0.6;
+}
+
+.fe-content-wrapper {
+    flex: 0.8;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.25rem;
+}
+
+.fe-project-card.grid .fe-content-wrapper {
+    padding: 1.5rem;
+}
+
+.fe-header-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.fe-category-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent-indigo);
+    opacity: 0.6;
+}
+
+.fe-project-name {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.fe-project-card.grid .fe-project-name {
+    font-size: 1.25rem;
+}
+
+.fe-project-desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    opacity: 0.9;
+}
+
+.fe-footer-meta {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.fe-tech-list {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    opacity: 0.6;
+}
+
+/* Lightbox Overlay Styles */
+.fe-lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(15px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 2rem;
+    cursor: zoom-out;
+}
+
+.fe-lightbox-img {
+    max-width: 90%;
+    max-height: 85vh;
+    border-radius: 12px;
+    box-shadow: 0 50px 100px rgba(0, 0, 0, 0.5);
+    object-fit: contain;
+}
+
+.fe-lightbox-close {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    background: white;
+    border: none;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #111827;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Overrides */
+@media (max-width: 992px) {
+    .fe-project-card.zigzag {
+        flex-direction: column !important;
+        gap: 2rem;
+        padding: 1.5rem;
+        min-height: auto;
+    }
+}
+
+/* Mini Bento Grid Redesign */
+.mini-bento-container {
+    padding: 3rem 0;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    background: #f9fafb;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.bento-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.mini-bento-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 210px;
+    gap: 1.25rem;
+    padding: 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* Bento Tile Base Styling */
+.bento-tile {
+    position: relative;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 18px;
+    padding: 1.15rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    cursor: default;
+    overflow: hidden;
+}
+
+/* Bento Adaptive Sizing */
+.bento-large {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+.bento-wide {
+    grid-column: span 2;
+    grid-row: span 1;
+}
+
+.bento-standard {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+/* Glow Effect */
+.bento-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150%;
+    height: 150%;
+    background: radial-gradient(circle at center, var(--tile-glow), transparent 70%);
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.6s ease, opacity 0.6s ease;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.bento-tile:hover .bento-glow {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+/* Dynamic Color Themes */
+.bento-amber {
+    background: rgba(251, 191, 36, 0.03);
+    --tile-glow: rgba(251, 191, 36, 0.15);
+    --status-bg: rgba(251, 191, 36, 0.1);
+}
+
+.bento-blue {
+    background: rgba(59, 130, 246, 0.03);
+    --tile-glow: rgba(59, 130, 246, 0.15);
+    --status-bg: rgba(59, 130, 246, 0.1);
+}
+
+.bento-violet {
+    background: rgba(139, 92, 246, 0.03);
+    --tile-glow: rgba(139, 92, 246, 0.15);
+    --status-bg: rgba(139, 92, 246, 0.1);
+}
+
+.bento-emerald {
+    background: rgba(16, 185, 129, 0.03);
+    --tile-glow: rgba(16, 185, 129, 0.15);
+    --status-bg: rgba(16, 185, 129, 0.1);
+}
+
+.bento-amber:hover {
+    border-color: rgba(251, 191, 36, 0.3);
+}
+
+.bento-blue:hover {
+    border-color: rgba(59, 130, 246, 0.3);
+}
+
+.bento-violet:hover {
+    border-color: rgba(139, 92, 246, 0.3);
+}
+
+.bento-emerald:hover {
+    border-color: rgba(16, 185, 129, 0.3);
+}
+
+.pill-tech-icon {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.5rem;
+    color: var(--accent-indigo);
+    opacity: 0.15;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+/* Bento Tile Interior Styles */
+.bento-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.bento-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.3rem 0.6rem;
+    background: var(--status-bg, rgba(0, 0, 0, 0.03));
+    border-radius: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.02);
+}
+
+.status-dot {
+    width: 6px;
+    height: 6px;
+    background: #10b981;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #10b981;
+    animation: pulse-dot 2s infinite;
+}
+
+.status-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: #4b5563;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.bento-icon {
+    color: #374151;
+    opacity: 0.4;
+    transition: opacity 0.3s ease;
+}
+
+.bento-tile:hover .bento-icon {
+    opacity: 1;
+    color: var(--accent-indigo);
+}
+
+.bento-body {
+    position: relative;
+    z-index: 1;
+    margin: 0.5rem 0;
+}
+
+.bento-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 0.35rem;
+}
+
+.bento-desc {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    color: #4b5563;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Bento Footer */
+.bento-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.bento-tech-tag {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    opacity: 0.8;
+    letter-spacing: 0.05em;
+}
+
+/* Bento Actions - Glass Technical Badges */
+.bento-actions {
+    display: flex;
+    gap: 0.85rem;
+    align-items: center;
+}
+
+.bento-action-pill {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding: 0.45rem;
+    background: rgba(17, 24, 39, 0.85);
+    backdrop-filter: blur(8px);
+    border-radius: 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 600;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    white-space: nowrap;
+    overflow: hidden;
+    width: 36px;
+    justify-content: center;
+}
+
+.bento-action-pill span {
+    width: 0;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    margin-left: 0;
+    display: inline-block;
+}
+
+.bento-action-pill:hover {
+    width: 100px;
+    padding-left: 0.85rem;
+    padding-right: 0.85rem;
+    background: white;
+    color: #111827;
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.bento-action-pill:hover span {
+    width: auto;
+    opacity: 1;
+    margin-left: 0.5rem;
+}
+
+.bento-action-pill:hover span {
+    display: inline;
+}
+
+.bento-amber .bento-action-pill:hover {
+    color: #d97706;
+}
+
+.bento-blue .bento-action-pill:hover {
+    color: #2563eb;
+}
+
+.bento-violet .bento-action-pill:hover {
+    color: #7c3aed;
+}
+
+.bento-emerald .bento-action-pill:hover {
+    color: #059669;
+}
+
+@keyframes pulse-dot {
+    0% {
+        transform: scale(0.95);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(0.95);
+        opacity: 0.8;
+    }
+}
+
+
+/* Mobile Responsiveness */
+@media (max-width: 968px) {
+    .fs-layout {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .projects-header {
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .projects-section {
+        padding: 5rem 1.5rem;
+    }
+
+    .project-selector {
+        overflow-x: auto;
+        padding-bottom: 2px;
+        margin-bottom: 2rem;
+        gap: 1.5rem;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .project-tab {
+        white-space: nowrap;
+        font-size: 0.9rem;
+    }
+
+    .fs-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .fs-info {
+        display: contents;
+    }
+
+    .fs-title {
+        font-size: 1.8rem;
+    }
+
+    .fs-value {
+        font-size: 0.95rem;
+    }
+
+    .fs-features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Frontend Mobile Refinement */
+    .fe-view-toggle,
+    .fe-nav-strip,
+    .fe-spotlight-card,
+    .fe-theme-aura {
+        display: none !important;
+    }
+
+    .fe-controls {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .fe-filters {
+        width: 100%;
+        overflow-x: auto;
+        padding: 0.5rem;
+        display: flex;
+        gap: 0.5rem;
+        justify-content: flex-start;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        border-radius: 0;
+        background: transparent;
+        border: none;
+    }
+
+    .fe-filters::-webkit-scrollbar {
+        display: none;
+    }
+
+    .fe-filter-btn {
+        white-space: nowrap;
+        padding: 0.5rem 1.25rem;
+        background: rgba(15, 23, 42, 0.05);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        flex-shrink: 0;
+    }
+
+    .fe-filter-btn.active {
+        background: #0f172a;
+        color: white;
+    }
+
+    .fe-uniform-grid {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        grid-auto-rows: auto !important;
+        gap: 1.5rem;
+        width: 100%;
+    }
+
+    .fe-uniform-card {
+        height: auto;
+        min-height: 420px;
+    }
+
+    .fe-uniform-card .fe-bento-visual {
+        height: 200px;
+    }
+
+    /* Mini Bento Grid Mobile Adjustments */
+    .mini-bento-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .bento-large,
+    .bento-wide,
+    .bento-standard {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+
+    .bento-tile {
+        padding: 1.25rem;
+    }
+
+    .bento-title {
+        font-size: 1.15rem;
+    }
+}

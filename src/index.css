@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Poppins:wght@300;400;500;600&family=Sora:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg-color: #f8fafc;
+  --text-main: #0f172a;
+  --text-secondary: #475569;
+  --accent-indigo: #4f46e5;
+  --accent-indigo-hover: #4338ca;
+  --bg-buttons: #ffffff;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: transparent;
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Sora', sans-serif;
+  margin: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+button {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ==============================
+   SHARED: Floating Badge Chip
+   ============================== */
+.section-heading-tag {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 3rem;
+  position: relative;
+  padding: 1.5rem 0;
+}
+
+/* Giant watermark behind */
+.section-heading-tag::after {
+  content: attr(data-label);
+  position: absolute;
+  font-family: 'Sora', sans-serif;
+  font-size: 5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(79, 70, 229, 0.09);
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  transition: all 0.5s ease;
+}
+
+.section-heading-tag:hover::after {
+  color: rgba(79, 70, 229, 0.10);
+  transform: scale(1.02);
+}
+
+/* Floating indigo chip */
+.tag-text {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  color: #4f46e5;
+  padding: 0.5rem 1.25rem;
+  position: relative;
+  z-index: 1;
+  border-radius: 100px;
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.06), rgba(129, 140, 248, 0.08));
+  border: 1px solid rgba(79, 70, 229, 0.12);
+  box-shadow: 0 2px 12px rgba(79, 70, 229, 0.06);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.section-heading-tag:hover .tag-text {
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(129, 140, 248, 0.12));
+  border-color: rgba(79, 70, 229, 0.2);
+  box-shadow: 0 4px 20px rgba(79, 70, 229, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Hide the old gradient line */
+.tag-gradient-line {
+  display: none;
+}
