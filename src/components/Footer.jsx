@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import './Footer.css';
+import '../styles/Footer.css';
 
 /* Live Clock Hook */
 const useLiveClock = () => {

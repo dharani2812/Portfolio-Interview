@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import './Navbar.css';
+import '../styles/Navbar.css';
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -12,43 +12,36 @@ const Navbar = () => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 20);
 
-            // Force "Home" if we're at the very top
+            // Scroll Spy Logic based on viewport position
+            const sections = ['home', 'skills', 'projects', 'about'];
+            let currentSection = 'Home'; // default
+
+            for (const sectionId of sections) {
+                const element = document.getElementById(sectionId);
+                if (element) {
+                    const rect = element.getBoundingClientRect();
+                    // If the section's top is above the middle of the screen
+                    // and its bottom is below the top quarter of the screen
+                    if (rect.top <= window.innerHeight / 3 && rect.bottom >= window.innerHeight / 3) {
+                        currentSection = sectionId === 'home' ? 'Home' :
+                            sectionId.charAt(0).toUpperCase() + sectionId.slice(1);
+                    }
+                }
+            }
+
+            // Force "Home" if we're at the very top (safeguard)
             if (window.scrollY < 100) {
                 setActiveSection('Home');
+            } else {
+                setActiveSection(currentSection);
             }
         };
 
-        // Scroll Spy Logic
-        const sections = ['home', 'skills', 'projects', 'about'];
-        const observerOptions = {
-            root: null,
-            // Section is active when it occupies the top part of the viewport
-            rootMargin: '-15% 0px -70% 0px',
-            threshold: 0
-        };
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll(); // Trigger once on mount
 
-        const observerCallback = (entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    const sectionId = entry.target.id;
-                    const linkName = sectionId === 'home' ? 'Home' :
-                        sectionId.charAt(0).toUpperCase() + sectionId.slice(1);
-                    setActiveSection(linkName);
-                }
-            });
-        };
-
-        const observer = new IntersectionObserver(observerCallback, observerOptions);
-
-        sections.forEach((id) => {
-            const element = document.getElementById(id);
-            if (element) observer.observe(element);
-        });
-
-        window.addEventListener('scroll', handleScroll);
         return () => {
             window.removeEventListener('scroll', handleScroll);
-            observer.disconnect();
         };
     }, []);
 
@@ -58,6 +51,41 @@ const Navbar = () => {
         { name: 'Projects', href: '#projects' },
         { name: 'About', href: '#about' },
     ];
+
+    // Framer Motion Variants for Staggered Mobile Menu
+    const menuVariants = {
+        closed: {
+            opacity: 0,
+            scale: 0.95,
+            y: -20,
+            transition: {
+                staggerChildren: 0.05,
+                staggerDirection: -1, // Reverse stagger on exit
+                when: "afterChildren" // Wait for items to disappear before hiding card
+            }
+        },
+        open: {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            transition: {
+                type: "spring",
+                bounce: 0,
+                duration: 0.4,
+                delayChildren: 0.1, // Wait for card to start appearing before popping links
+                staggerChildren: 0.08 // Time gap between each link popping in
+            }
+        }
+    };
+
+    const itemVariants = {
+        closed: { opacity: 0, y: 15 },
+        open: {
+            opacity: 1,
+            y: 0,
+            transition: { type: "spring", stiffness: 300, damping: 24 }
+        }
+    };
 
     return (
         <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
@@ -151,14 +179,19 @@ const Navbar = () => {
                 {isMobileMenuOpen && (
                     <motion.div
                         className="mobile-menu-overlay"
-                        initial={{ opacity: 0, scale: 0.9, y: -20 }}
-                        animate={{ opacity: 1, scale: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.9, y: -20 }}
-                        transition={{ duration: 0.3, ease: 'easeOut' }}
+                        variants={menuVariants}
+                        initial="closed"
+                        animate="open"
+                        exit="closed"
                     >
+                        {/* Glow Orbs behind the glass */}
+                        <div className="hologram-orb orb-1"></div>
+                        <div className="hologram-orb orb-2"></div>
+
                         <div className="mobile-menu-glass">
                             {navLinks.map((link) => (
-                                <a
+                                <motion.a
+                                    variants={itemVariants}
                                     key={link.name}
                                     href={link.href}
                                     className={`mobile-nav-link ${activeSection === link.name ? 'active' : ''}`}
@@ -168,15 +201,16 @@ const Navbar = () => {
                                     }}
                                 >
                                     {link.name}
-                                </a>
+                                </motion.a>
                             ))}
-                            <a
+                            <motion.a
+                                variants={itemVariants}
                                 href="#contact"
                                 className="mobile-btn-contact"
                                 onClick={() => setIsMobileMenuOpen(false)}
                             >
                                 Contact
-                            </a>
+                            </motion.a>
                         </div>
                     </motion.div>
                 )}

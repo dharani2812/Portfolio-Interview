@@ -3,6 +3,7 @@
     max-width: 1100px;
     margin: 0 auto;
     position: relative;
+    overflow-x: hidden;
 }
 
 .contact-label-header {
@@ -21,7 +22,7 @@
 }
 
 .contact-section-title {
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 6vw, 2rem);
     font-weight: 700;
     color: #0f172a;
     letter-spacing: -0.02em;
@@ -557,16 +558,17 @@
 @media (max-width: 768px) {
     .contact-section {
         padding: 3.5rem 1rem;
+        width: 100%;
     }
 
     .tp-body {
         flex-direction: column;
-        padding: 1.75rem;
+        padding: 1.25rem;
         gap: 2rem;
     }
 
     .tp-tag-main {
-        font-size: 1.4rem;
+        font-size: clamp(1.2rem, 5vw, 1.4rem);
     }
 
     .tp-left {

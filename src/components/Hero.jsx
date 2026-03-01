@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Download } from 'lucide-react';
-import './Hero.css';
+import '../styles/Hero.css';
 
 const ROLES = [
     "React Developer",

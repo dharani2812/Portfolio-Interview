@@ -53,7 +53,7 @@
 
 .cap-title {
     font-family: 'Fira Code', monospace;
-    font-size: 0.7rem;
+    font-size: clamp(0.55rem, 2vw, 0.7rem);
     font-weight: 500;
     color: var(--text-main);
     letter-spacing: 0.08em;
@@ -75,6 +75,8 @@
 @media (max-width: 768px) {
     .capabilities-section {
         padding: 2.5rem 1rem;
+        width: 100%;
+        overflow-x: hidden;
     }
 
     .cap-pill {
@@ -83,5 +85,6 @@
 
     .cap-title {
         font-size: 0.6rem;
+        /* Fallback */
     }
 }

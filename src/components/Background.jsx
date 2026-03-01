@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import './Background.css';
+import '../styles/Background.css';
 
 const Background = () => {
   return (

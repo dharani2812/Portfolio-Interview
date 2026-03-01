@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import './Capabilities.css';
+import '../styles/Capabilities.css';
 
 const CAPABILITIES = [
     "SECURE AUTH SYSTEMS",

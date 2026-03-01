@@ -5,6 +5,8 @@
     justify-content: center;
     position: relative;
     z-index: 1;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 .skills-container {
@@ -25,7 +27,7 @@
 
 .skills-title {
     font-family: 'Poppins', sans-serif;
-    font-size: 2.5rem;
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
     font-weight: 600;
     margin-bottom: 5rem;
     text-align: center;
@@ -109,6 +111,8 @@
     display: flex;
     flex-direction: column;
     gap: 0.6rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 /* Command Line */
@@ -118,6 +122,8 @@
     gap: 0.8rem;
     font-family: 'Fira Code', monospace;
     font-size: 1.05rem;
+    word-break: break-word;
+    flex-wrap: wrap;
 }
 
 .prompt {
@@ -147,6 +153,7 @@
     padding-left: 1.8rem;
     line-height: 1.6;
     transition: color 0.3s ease;
+    word-break: break-word;
 }
 
 .terminal-group:hover .output-text {
@@ -206,6 +213,7 @@
 
     .npm-install-block {
         padding: 1.25rem;
+        overflow-x: auto;
     }
 }
 

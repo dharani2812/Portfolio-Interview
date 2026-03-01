@@ -336,6 +336,8 @@
 @media (max-width: 768px) {
     .site-footer {
         padding: 0 1rem 1.25rem;
+        width: 100%;
+        overflow-x: hidden;
     }
 
     .footer-top {

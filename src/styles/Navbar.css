@@ -241,55 +241,133 @@
 /* Mobile Menu Panel */
 .mobile-menu-overlay {
     position: fixed;
-    top: 4.5rem;
-    left: 1rem;
-    right: 1rem;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(15, 23, 42, 0.35);
+    /* Subtle deep slate tint */
+    backdrop-filter: blur(28px);
+    /* Massive Vision OS style cinematic blur */
+    -webkit-backdrop-filter: blur(28px);
     z-index: 999;
+
+    /* Center the white card in the middle of the screen */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    /* Prevent orbs from spilling out of the screen */
+}
+
+/* Hologram Orbs placed behind the glass card */
+.hologram-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    /* Massive blur for smooth glow */
+    z-index: 0;
+    opacity: 0.6;
+    animation: orbFloat 8s infinite alternate ease-in-out;
+}
+
+.orb-1 {
+    width: 250px;
+    height: 250px;
+    background: #4f46e5;
+    /* Indigo */
+    top: 50%;
+    left: 50%;
+    transform: translate(-90%, -90%);
+}
+
+.orb-2 {
+    width: 220px;
+    height: 220px;
+    background: #06b6d4;
+    /* Cyan */
+    top: 50%;
+    left: 50%;
+    transform: translate(-10%, -10%);
+    animation-delay: -4s;
+    animation-duration: 10s;
+}
+
+@keyframes orbFloat {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    100% {
+        transform: translate(-30%, -70%) scale(1.2);
+    }
 }
 
 .mobile-menu-glass {
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(15, 23, 42, 0.08);
+    position: relative;
+    z-index: 1;
+    /* Above the orbs */
+    background: rgba(255, 255, 255, 0.65);
+    /* Semi-transparent frosted white glass */
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    /* Subtle inner border to highlight the glass edge */
+    border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: 1.5rem;
-    padding: 2rem;
+    padding: 2.5rem 2rem 2rem 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06), 0 4px 6px rgba(0, 0, 0, 0.02);
 }
 
 .mobile-nav-link {
-    font-family: 'Sora', sans-serif;
-    font-size: 1.2rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
     font-weight: 600;
-    color: var(--text-secondary);
+    color: #475569;
+    /* Slate 600 */
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: all 0.2s ease;
 }
 
 .mobile-nav-link.active,
 .mobile-nav-link:active {
-    color: var(--accent-indigo);
+    color: #4f46e5;
+    /* Indigo 600 */
 }
 
 .mobile-btn-contact {
     width: 100%;
     text-align: center;
     padding: 1rem;
-    background: var(--accent-indigo);
+    margin-top: 0.5rem;
+    background: #4f46e5;
     color: white;
-    border-radius: 0.8rem;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 0.75rem;
     text-decoration: none;
+    font-size: 1rem;
     font-weight: 600;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.mobile-btn-contact:hover {
+    background: #4338ca;
+    transform: translateY(-2px);
 }
 
 /* Responsive Breakpoints */
 @media (max-width: 900px) {
     .navbar {
         padding: 1rem 1.5rem;
+    }
+
+    .navbar.scrolled {
+        padding: 0.75rem 1.5rem;
     }
 
     .navbar-menu-desktop,
@@ -306,5 +384,16 @@
         background: none;
         -webkit-text-fill-color: var(--accent-indigo);
         color: var(--accent-indigo);
+    }
+
+    .mobile-menu-overlay {
+        padding: 1.5rem;
+        /* Keep card away from screen edges */
+    }
+
+    .mobile-menu-glass {
+        width: 100%;
+        max-width: 380px;
+        margin: 0 auto;
     }
 }

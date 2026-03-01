@@ -3,6 +3,8 @@
     padding: 8rem 2rem;
     position: relative;
     /* background is transparent to show noise+gradient bg */
+    overflow-x: hidden;
+    width: 100%;
 }
 
 .projects-container {
@@ -21,7 +23,7 @@
 
 .section-title {
     font-family: 'Poppins', sans-serif;
-    font-size: 1.5rem;
+    font-size: clamp(1.2rem, 4vw, 1.5rem);
     color: var(--accent-indigo);
     font-weight: 600;
 }
@@ -1454,6 +1456,21 @@
         gap: 2.5rem;
     }
 
+    .fs-preview {
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    .preview-frame {
+        width: 100%;
+        height: auto;
+    }
+
+    .project-img {
+        max-width: 100%;
+        height: auto;
+    }
+
     .projects-header {
         margin-bottom: 2rem;
     }
@@ -1461,7 +1478,7 @@
 
 @media (max-width: 768px) {
     .projects-section {
-        padding: 5rem 1.5rem;
+        padding: 5rem 1rem;
     }
 
     .project-selector {
@@ -1481,6 +1498,7 @@
         display: flex;
         flex-direction: column;
         gap: 2rem;
+        width: 100%;
     }
 
     .fs-info {
@@ -1488,7 +1506,7 @@
     }
 
     .fs-title {
-        font-size: 1.8rem;
+        font-size: clamp(1.5rem, 6vw, 2.2rem);
     }
 
     .fs-value {

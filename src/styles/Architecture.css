@@ -4,6 +4,7 @@
     margin: 0 auto;
     position: relative;
     background: transparent;
+    overflow-x: hidden;
 }
 
 .architecture-header {
@@ -22,7 +23,7 @@
 }
 
 .section-title {
-    font-size: 2.25rem;
+    font-size: clamp(1.75rem, 6vw, 2.25rem);
     font-weight: 700;
     color: #0f172a;
     letter-spacing: -0.02em;
@@ -137,7 +138,7 @@
 }
 
 .zigzag-title {
-    font-size: 0.95rem;
+    font-size: clamp(0.85rem, 3vw, 0.95rem);
     font-weight: 600;
     color: #1e293b;
     margin: 0;
@@ -154,12 +155,12 @@
 @media (max-width: 768px) {
     .zigzag-line-wrapper {
         left: 20px;
-        transform: none;
+        transform: translateX(-50%);
     }
 
     .zigzag-dot {
         left: 20px;
-        transform: none;
+        transform: translateX(-50%);
     }
 
     .zigzag-node.left,
@@ -168,7 +169,7 @@
     }
 
     .zigzag-pill {
-        width: calc(100% - 60px);
+        width: calc(100% - 40px);
         border-radius: 20px;
         padding: 1rem;
         flex-direction: column;
@@ -178,5 +179,6 @@
 
     .section-title {
         font-size: 1.75rem;
+        /* Fallback */
     }
 }

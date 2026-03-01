@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import profileImg from '../assets/profile.webp';
-import './About.css';
+import '../styles/About.css';
 
 const focusAreas = [
     "Full-Stack Development",

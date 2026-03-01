@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
-import './Architecture.css';
+import '../styles/Architecture.css';
 
 const workflowStages = [
     { title: "Planning & Strategy", description: "Scope and blueprinting.", icon: "📋" },

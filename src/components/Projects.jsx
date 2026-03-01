@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from 'framer-motion';
 import { Github, ExternalLink, ArrowRight, Braces, Code2, Layout, Grid, Maximize2, X } from 'lucide-react';
-import './Projects.css';
+import '../styles/Projects.css';
 
 
 /* 3D Mouse-Tracking Tilt Image (matches About page) */
