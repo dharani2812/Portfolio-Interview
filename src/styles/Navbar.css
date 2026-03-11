@@ -5,7 +5,7 @@
     width: 100%;
     z-index: 1000;
     padding: 1.5rem 2rem;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s cubic-bezier(0.4, 0, 0.2, 1), backdrop-filter 0.3s ease;
 }
 
 .navbar.scrolled {
@@ -164,7 +164,7 @@
     /* Trick to show solid color initially */
     /* We use a solid overlay or just manage via background-position */
     -webkit-text-fill-color: var(--text-secondary);
-    transition: all 0.4s ease;
+    transition: background-position 0.4s ease, -webkit-text-fill-color 0.4s ease;
 }
 
 .nav-link:hover .nav-link-text {

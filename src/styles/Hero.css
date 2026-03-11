@@ -168,7 +168,7 @@
     font-weight: 500;
     color: var(--text-secondary);
     cursor: default;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -197,7 +197,7 @@
     font-weight: 500;
     font-size: 1rem;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
     min-width: 180px;
     text-decoration: none;
 }
@@ -239,7 +239,7 @@
 
 .btn-secondary .icon-download {
     opacity: 0.6;
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .btn-secondary:hover .icon-download {

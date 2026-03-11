@@ -5,7 +5,7 @@ import '../styles/Projects.css';
 
 
 /* 3D Mouse-Tracking Tilt Image (matches About page) */
-const TiltProjectImage = ({ src, alt, onClick }) => {
+const TiltProjectImage = React.memo(({ src, alt, onClick }) => {
     const ref = useRef(null);
     const mx = useMotionValue(0);
     const my = useMotionValue(0);
@@ -28,20 +28,30 @@ const TiltProjectImage = ({ src, alt, onClick }) => {
             onMouseMove={handleMouse}
             onMouseLeave={handleLeave}
             onClick={onClick}
-            style={{ rotateX, rotateY, transformStyle: "preserve-3d", cursor: 'zoom-in' }}
+            style={{
+                rotateX,
+                rotateY,
+                transformStyle: "preserve-3d",
+                cursor: 'zoom-in',
+                willChange: "transform"
+            }}
         >
             <img src={src} alt={alt} className="fe-spotlight-img" />
         </motion.div>
     );
-};
+});
 
-const Projects = () => {
+TiltProjectImage.displayName = 'TiltProjectImage';
+
+const Projects = React.memo(() => {
     const [activeTab, setActiveTab] = useState('fullstack');
     const [activeProjectIndex, setActiveProjectIndex] = useState(0);
     const [frontendFilter, setFrontendFilter] = useState('All');
     const [frontendView, setFrontendView] = useState('spotlight'); // 'spotlight' or 'grid'
     const [activeFrontendIndex, setActiveFrontendIndex] = useState(0);
     const [selectedImage, setSelectedImage] = useState(null);
+
+
 
     // Responsive Controller: Force Grid view on mobile
     useEffect(() => {
@@ -752,6 +762,6 @@ const Projects = () => {
             </AnimatePresence>
         </section>
     );
-};
+});
 
 export default Projects;

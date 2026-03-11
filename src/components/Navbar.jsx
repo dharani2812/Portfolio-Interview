@@ -9,39 +9,48 @@ const Navbar = () => {
     const [activeSection, setActiveSection] = useState('Home');
 
     useEffect(() => {
+        // 1. Throttled scroll listener for navbar background (isScrolled)
+        let ticking = false;
         const handleScroll = () => {
-            setIsScrolled(window.scrollY > 20);
-
-            // Scroll Spy Logic based on viewport position
-            const sections = ['home', 'skills', 'projects', 'about'];
-            let currentSection = 'Home'; // default
-
-            for (const sectionId of sections) {
-                const element = document.getElementById(sectionId);
-                if (element) {
-                    const rect = element.getBoundingClientRect();
-                    // If the section's top is above the middle of the screen
-                    // and its bottom is below the top quarter of the screen
-                    if (rect.top <= window.innerHeight / 3 && rect.bottom >= window.innerHeight / 3) {
-                        currentSection = sectionId === 'home' ? 'Home' :
-                            sectionId.charAt(0).toUpperCase() + sectionId.slice(1);
-                    }
-                }
-            }
-
-            // Force "Home" if we're at the very top (safeguard)
-            if (window.scrollY < 100) {
-                setActiveSection('Home');
-            } else {
-                setActiveSection(currentSection);
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    setIsScrolled(window.scrollY > 20);
+                    ticking = false;
+                });
+                ticking = true;
             }
         };
 
         window.addEventListener('scroll', handleScroll, { passive: true });
-        handleScroll(); // Trigger once on mount
+        handleScroll();
+
+        // 2. Intersection Observer for Scroll Spy (Zero-lag section tracking)
+        const sections = ['home', 'skills', 'projects', 'challenges', 'about'];
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -70% 0px', // Trigger when section is in top-middle area
+            threshold: 0
+        };
+
+        const observerCallback = (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    const name = id === 'home' ? 'Home' : id.charAt(0).toUpperCase() + id.slice(1);
+                    setActiveSection(name);
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+        sections.forEach((id) => {
+            const el = document.getElementById(id);
+            if (el) observer.observe(el);
+        });
 
         return () => {
             window.removeEventListener('scroll', handleScroll);
+            observer.disconnect();
         };
     }, []);
 
@@ -50,6 +59,7 @@ const Navbar = () => {
         { name: 'Skills', href: '#skills' },
         { name: 'Projects', href: '#projects' },
         { name: 'About', href: '#about' },
+        { name: 'Challenges', href: '#challenges' },
     ];
 
     // Framer Motion Variants for Staggered Mobile Menu

@@ -55,32 +55,10 @@ const useCounter = (target, duration = 2000) => {
     return [count, setStarted];
 };
 
-// Typing Animation Hook
-const useTypingEffect = (text, speed = 30, startDelay = 0) => {
-    const [displayed, setDisplayed] = useState("");
-    const [started, setStarted] = useState(false);
-
-    useEffect(() => {
-        if (!started) return;
-        let i = 0;
-        const delayTimer = setTimeout(() => {
-            const interval = setInterval(() => {
-                setDisplayed(text.substring(0, i + 1));
-                i++;
-                if (i >= text.length) clearInterval(interval);
-            }, speed);
-            return () => clearInterval(interval);
-        }, startDelay);
-        return () => clearTimeout(delayTimer);
-    }, [started, text, speed, startDelay]);
-
-    return [displayed, setStarted];
-};
-
 // Spring animation config
 const springConfig = { type: "spring", stiffness: 100, damping: 15 };
 
-const About = () => {
+const About = React.memo(() => {
     return (
         <section className="about-section" id="about">
             <motion.div
@@ -115,8 +93,6 @@ const About = () => {
                         </div>
                     </div>
                 </motion.div>
-
-
 
                 {/* Terminal Bio (typing animation) */}
                 <motion.div
@@ -170,17 +146,13 @@ const About = () => {
                         ))}
                     </div>
                 </motion.div>
-
-
-
-
             </div>
         </section>
     );
-};
+});
 
 /* 3D Tilt Profile Image */
-const TiltImage = () => {
+const TiltImage = React.memo(() => {
     const ref = useRef(null);
     const x = useMotionValue(0);
     const y = useMotionValue(0);
@@ -204,7 +176,12 @@ const TiltImage = () => {
             className="profile-frame"
             onMouseMove={handleMouse}
             onMouseLeave={handleLeave}
-            style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+            style={{
+                rotateX,
+                rotateY,
+                transformStyle: "preserve-3d",
+                willChange: "transform"
+            }}
         >
             <img
                 src={profileImg}
@@ -213,10 +190,12 @@ const TiltImage = () => {
             />
         </motion.div>
     );
-};
+});
+
+TiltImage.displayName = 'TiltImage';
 
 /* Terminal Bio with Typing Effect */
-const TerminalBio = () => {
+const TerminalBio = React.memo(() => {
     const [visibleLines, setVisibleLines] = useState(0);
     const [inView, setInView] = useState(false);
 
@@ -266,10 +245,12 @@ const TerminalBio = () => {
             </div>
         </motion.div>
     );
-};
+});
+
+TerminalBio.displayName = 'TerminalBio';
 
 /* Animated Counter for Metrics */
-const MetricCounter = ({ metric }) => {
+const MetricCounter = React.memo(({ metric }) => {
     const [count, setStarted] = useCounter(metric.value, 1500);
     return (
         <motion.div
@@ -280,6 +261,8 @@ const MetricCounter = ({ metric }) => {
             <span className="metric-label">{metric.label}</span>
         </motion.div>
     );
-};
+});
+
+MetricCounter.displayName = 'MetricCounter';
 
 export default About;

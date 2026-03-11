@@ -1,0 +1,209 @@
+.challenges-section {
+    padding: 6rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.title-glow {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 250px;
+    height: 120px;
+    background: radial-gradient(circle, rgba(79, 70, 229, 0.08) 0%, transparent 70%);
+    filter: blur(40px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.challenges-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+    position: relative;
+    z-index: 1;
+
+    .section-title {
+        font-size: clamp(1.8rem, 4vw, 2.2rem);
+        color: var(--text-main);
+        margin-bottom: 1rem;
+        letter-spacing: -0.02em;
+    }
+
+    .section-description {
+        font-size: 1.05rem;
+        color: var(--text-secondary);
+        max-width: 650px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+}
+
+.challenges-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    position: relative;
+    padding-left: 2rem;
+
+    .timeline-guide {
+        position: absolute;
+        left: 3px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(to bottom,
+                rgba(79, 70, 229, 0) 0%,
+                rgba(79, 70, 229, 0.12) 10%,
+                rgba(79, 70, 229, 0.12) 90%,
+                rgba(79, 70, 229, 0) 100%);
+        z-index: 0;
+    }
+}
+
+.accordion-item {
+    background: var(--bg-buttons);
+    border-radius: 16px;
+    border: 1px solid rgba(79, 70, 229, 0.06);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+    overflow: hidden;
+    transition: border-color 0.3s ease-out, box-shadow 0.3s ease-out, background 0.3s ease-out;
+    position: relative;
+    z-index: 1;
+
+    .timeline-dot {
+        position: absolute;
+        left: -32px;
+        top: 1.6rem;
+        width: 6px;
+        height: 6px;
+        background: rgba(79, 70, 229, 0.15);
+        border-radius: 50%;
+        transition: background 0.3s ease-out, box-shadow 0.3s ease-out;
+    }
+
+    &:hover {
+        border-color: rgba(79, 70, 229, 0.2);
+        box-shadow: 0 8px 25px rgba(79, 70, 229, 0.06);
+
+        .timeline-dot {
+            background: var(--accent-indigo);
+            box-shadow: 0 0 8px rgba(79, 70, 229, 0.3);
+        }
+    }
+
+    &.active {
+        border-color: rgba(79, 70, 229, 0.25);
+        border-left: 3px solid var(--accent-indigo);
+        background: linear-gradient(to right, rgba(79, 70, 229, 0.01), var(--bg-buttons));
+        box-shadow: 0 15px 35px rgba(79, 70, 229, 0.08);
+
+        .timeline-dot {
+            background: var(--accent-indigo);
+            transform: scale(1.4);
+            box-shadow: 0 0 12px rgba(79, 70, 229, 0.4);
+        }
+    }
+}
+
+.accordion-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 1.8rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    outline: none;
+
+    .challenge-title {
+        font-size: 1.1rem;
+        color: var(--text-main);
+        font-weight: 600;
+        margin: 0;
+        transition: color 0.3s ease;
+        line-height: 1.4;
+    }
+
+    .expand-icon {
+        color: var(--accent-indigo);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(79, 70, 229, 0.04);
+        padding: 0.4rem;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+    }
+
+    &:hover .expand-icon {
+        background: rgba(79, 70, 229, 0.08);
+        transform: scale(1.05);
+    }
+}
+
+.accordion-content {
+    overflow: hidden;
+}
+
+.content-inner {
+    padding: 0 1.8rem 1.6rem 1.8rem;
+
+    .challenge-tags {
+        display: flex;
+        gap: 0.6rem;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .tech-tag {
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--accent-indigo);
+        background: rgba(79, 70, 229, 0.05);
+        padding: 0.25rem 0.7rem;
+        border-radius: 6px;
+    }
+
+    p {
+        font-size: 1rem;
+        line-height: 1.7;
+        color: var(--text-secondary);
+        margin: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .challenges-section {
+        padding: 4rem 1.25rem;
+    }
+
+    .challenges-accordion {
+        padding-left: 1.25rem;
+    }
+
+    .accordion-header {
+        padding: 1.25rem 1.4rem;
+
+        .challenge-title {
+            font-size: 1rem;
+        }
+    }
+
+    .content-inner {
+        padding: 0 1.4rem 1.5rem 1.4rem;
+
+        p {
+            font-size: 0.95rem;
+        }
+    }
+
+    .timeline-dot {
+        left: -27px;
+    }
+}

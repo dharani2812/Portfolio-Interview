@@ -11,7 +11,12 @@ const Background = () => {
       <div className="gradient-blob blob-3"></div>
 
       {/* SVG Noise Texture Overlay */}
-      <svg className="noise-overlay" width="100%" height="100%">
+      <svg
+        className="noise-overlay"
+        width="100%"
+        height="100%"
+        style={{ willChange: 'transform, opacity', transform: 'translateZ(0)' }}
+      >
         <filter id="noiseFilter">
           <feTurbulence
             type="fractalNoise"

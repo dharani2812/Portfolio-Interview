@@ -29,7 +29,7 @@ const SKILLS_DATA = [
     }
 ];
 
-const Skills = () => {
+const Skills = React.memo(() => {
     const [displayState, setDisplayState] = useState({
         lines: [],        // completed command+output pairs
         typing: '',       // currently typing text
@@ -171,6 +171,6 @@ const Skills = () => {
             </div>
         </section>
     );
-};
+});
 
 export default Skills;

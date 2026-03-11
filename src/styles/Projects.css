@@ -160,7 +160,7 @@
     font-family: 'Sora', sans-serif;
     font-size: 0.9rem;
     text-decoration: none;
-    transition: all 0.2s ease;
+    transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 .btn-action.primary {
@@ -323,7 +323,7 @@
     opacity: 0.08;
     z-index: -1;
     pointer-events: none;
-    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: background-color 0.8s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.8s ease;
 }
 
 .fe-theme-aura.bento-amber {
@@ -638,7 +638,7 @@
     overflow: hidden;
     cursor: pointer;
     background: #0f172a;
-    transition: all 0.3s ease;
+    transition: width 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .fe-nav-thumb img {
