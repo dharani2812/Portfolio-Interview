@@ -5,27 +5,19 @@ import '../styles/Skills.css';
 const SKILLS_DATA = [
     {
         command: 'stack --frontend',
-        output: 'HTML, CSS, SCSS, JavaScript, React, Framer Motion, Bootstrap, Tailwind CSS'
+        output: 'HTML5, CSS3, JavaScript (ES6+), React.js, Tailwind CSS, SCSS, Bootstrap'
     },
     {
         command: 'stack --backend',
-        output: 'Node.js, Express.js, JWT (Auth Security)'
+        output: 'Node.js, Express.js, REST API Design, JWT Authentication, MVC Architecture, CRUD Operations'
     },
     {
-        command: 'stack --languages',
-        output: 'Java'
+        command: 'stack --languages-db',
+        output: 'Java, SQL (MySQL), NoSQL (MongoDB), Firebase Firestore'
     },
     {
-        command: 'stack --database',
-        output: 'MySQL, MongoDB'
-    },
-    {
-        command: 'stack --deployment',
-        output: 'Netlify, GitHub Pages'
-    },
-    {
-        command: 'stack --tools',
-        output: 'GitHub, Git, VS Code, WordPress, Photoshop, Figma'
+        command: 'stack --tools-deploy',
+        output: 'Git, GitHub, VS Code, Figma, Vercel, Netlify, Render'
     }
 ];
 
