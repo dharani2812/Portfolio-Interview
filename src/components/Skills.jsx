@@ -22,73 +22,34 @@ const SKILLS_DATA = [
 ];
 
 const Skills = React.memo(() => {
-    const [displayState, setDisplayState] = useState({
-        lines: [],        // completed command+output pairs
-        typing: '',       // currently typing text
-        phase: 'idle'     // idle | typing | done
-    });
-
-    const animStarted = useRef(false);
-    const timersRef = useRef([]);
-
-    const clearAllTimers = useCallback(() => {
-        timersRef.current.forEach(t => clearTimeout(t));
-        timersRef.current = [];
-    }, []);
-
-    const startAnimation = useCallback(() => {
-        // Prevent double execution from React Strict Mode
-        if (animStarted.current) return;
-        animStarted.current = true;
-
-        let itemIdx = 0;
-        let charIdx = 0;
-
-        const scheduleNext = (fn, delay) => {
-            const id = setTimeout(fn, delay);
-            timersRef.current.push(id);
-        };
-
-        const tick = () => {
-            if (itemIdx >= SKILLS_DATA.length) {
-                setDisplayState(prev => ({ ...prev, typing: '', phase: 'done' }));
-                return;
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1,
+                delayChildren: 0.2
             }
+        }
+    };
 
-            const cmd = SKILLS_DATA[itemIdx].command;
+    const itemVariants = {
+        hidden: { opacity: 0, x: -10 },
+        visible: {
+            opacity: 1,
+            x: 0,
+            transition: { duration: 0.4, ease: "easeOut" }
+        }
+    };
 
-            if (charIdx <= cmd.length) {
-                setDisplayState(prev => ({
-                    ...prev,
-                    typing: cmd.slice(0, charIdx),
-                    phase: 'typing'
-                }));
-                charIdx++;
-                scheduleNext(tick, 18 + Math.random() * 12);
-            } else {
-                // Command fully typed — add to completed lines
-                const completedItem = SKILLS_DATA[itemIdx];
-                setDisplayState(prev => ({
-                    lines: [...prev.lines, completedItem],
-                    typing: '',
-                    phase: 'typing'
-                }));
-                charIdx = 0;
-                itemIdx++;
-                scheduleNext(tick, 150);
-            }
-        };
-
-        // Start after a short delay
-        scheduleNext(tick, 250);
-    }, []);
-
-    // Cleanup on unmount
-    useEffect(() => {
-        return () => clearAllTimers();
-    }, [clearAllTimers]);
-
-    const { lines, typing, phase } = displayState;
+    const outputVariants = {
+        hidden: { opacity: 0, y: 5 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.3, ease: "easeOut" }
+        }
+    };
 
     return (
         <section className="skills-section" id="skills">
@@ -107,8 +68,10 @@ const Skills = React.memo(() => {
 
                 <motion.div
                     className="terminal-window"
-                    onViewportEnter={startAnimation}
+                    initial="hidden"
+                    whileInView="visible"
                     viewport={{ once: true, amount: 0.3 }}
+                    variants={containerVariants}
                 >
                     <div className="terminal-header">
                         <div className="terminal-dots">
@@ -120,44 +83,32 @@ const Skills = React.memo(() => {
                     </div>
 
                     <div className="terminal-body">
-                        {/* Completed commands */}
-                        {lines.map((item, i) => (
-                            <div key={i} className="terminal-group">
+                        {SKILLS_DATA.map((item, i) => (
+                            <motion.div 
+                                key={i} 
+                                className="terminal-group"
+                                variants={itemVariants}
+                            >
                                 <div className="command-line">
                                     <span className="prompt">&gt;</span>
                                     <span className="command-text">{item.command}</span>
                                 </div>
                                 <motion.div
                                     className="output-text"
-                                    initial={{ opacity: 0, y: 5 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.25 }}
+                                    variants={outputVariants}
                                 >
                                     {item.output}
                                 </motion.div>
-                            </div>
+                            </motion.div>
                         ))}
 
-                        {/* Currently typing */}
-                        {phase === 'typing' && (
-                            <div className="terminal-group">
-                                <div className="command-line">
-                                    <span className="prompt">&gt;</span>
-                                    <span className="command-text">{typing}</span>
-                                    <span className="terminal-cursor"></span>
-                                </div>
-                            </div>
-                        )}
-
                         {/* Final blinking cursor */}
-                        {phase === 'done' && (
-                            <div className="terminal-group">
-                                <div className="command-line">
-                                    <span className="prompt">&gt;</span>
-                                    <span className="terminal-cursor"></span>
-                                </div>
+                        <motion.div className="terminal-group" variants={itemVariants}>
+                            <div className="command-line">
+                                <span className="prompt">&gt;</span>
+                                <span className="terminal-cursor"></span>
                             </div>
-                        )}
+                        </motion.div>
                     </div>
                 </motion.div>
             </div>
