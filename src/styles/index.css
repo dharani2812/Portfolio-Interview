@@ -109,3 +109,46 @@ button {
 .tag-gradient-line {
   display: none;
 }
+
+/* ==============================
+   GLOBAL SCROLL PERFORMANCE
+   (Low-end device friendly — no GPU layer promotion)
+   ============================== */
+
+/* Off-screen sections: defer rendering until near viewport (CPU-friendly) */
+section:not(:first-of-type) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}
+
+/* Disable overscroll bounce for a tighter scroll feel */
+html {
+  overscroll-behavior: none;
+}
+
+body {
+  overscroll-behavior-y: none;
+}
+
+/* ==============================
+   REDUCED MOTION — respects user/OS preference
+   Disables ALL animations for low-end or accessibility devices
+   ============================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .gradient-blob {
+    animation: none !important;
+  }
+
+  .grid-layer,
+  .light-sweep,
+  .noise-overlay {
+    display: none !important;
+  }
+}

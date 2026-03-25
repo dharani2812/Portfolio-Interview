@@ -20,85 +20,57 @@
 
 /* ==============================
    GRADIENT BLOBS
+   Reduced blur for lower CPU usage
    ============================== */
 .gradient-blob {
     position: absolute;
     border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.3;
+    filter: blur(50px);
+    opacity: 0.25;
     pointer-events: none;
-    will-change: transform;
 }
 
 .blob-1 {
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(79, 70, 229, 0.15), transparent 70%);
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(79, 70, 229, 0.12), transparent 70%);
     top: -5%;
     right: -5%;
-    animation: blob-drift-1 25s ease-in-out infinite;
+    animation: blob-drift-1 30s ease-in-out infinite;
 }
 
 .blob-2 {
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(129, 140, 248, 0.12), transparent 70%);
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(129, 140, 248, 0.1), transparent 70%);
     bottom: 10%;
     left: -5%;
-    animation: blob-drift-2 30s ease-in-out infinite;
+    animation: blob-drift-2 35s ease-in-out infinite;
 }
 
 .blob-3 {
-    width: 350px;
-    height: 350px;
-    background: radial-gradient(circle, rgba(167, 139, 250, 0.1), transparent 70%);
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(167, 139, 250, 0.08), transparent 70%);
     top: 40%;
     left: 50%;
-    animation: blob-drift-3 20s ease-in-out infinite;
+    animation: blob-drift-3 28s ease-in-out infinite;
 }
 
+/* Simplified keyframes — fewer transform operations */
 @keyframes blob-drift-1 {
-
-    0%,
-    100% {
-        transform: translate(0, 0) scale(1);
-    }
-
-    33% {
-        transform: translate(-30px, 40px) scale(1.05);
-    }
-
-    66% {
-        transform: translate(20px, -20px) scale(0.95);
-    }
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-20px, 25px); }
 }
 
 @keyframes blob-drift-2 {
-
-    0%,
-    100% {
-        transform: translate(0, 0) scale(1);
-    }
-
-    33% {
-        transform: translate(40px, -30px) scale(1.08);
-    }
-
-    66% {
-        transform: translate(-20px, 20px) scale(0.92);
-    }
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(25px, -20px); }
 }
 
 @keyframes blob-drift-3 {
-
-    0%,
-    100% {
-        transform: translate(0, 0) scale(1);
-    }
-
-    50% {
-        transform: translate(-35px, -25px) scale(1.1);
-    }
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-20px, -15px); }
 }
 
 /* ==============================
@@ -109,29 +81,28 @@
     inset: 0;
     width: 100%;
     height: 100%;
-    opacity: 0.06;
+    opacity: 0.04;
     pointer-events: none;
     mix-blend-mode: multiply;
 }
 
 /* ==============================
    GRID LAYER
+   Reduced from 200vw to 100vw for less paint area
    ============================== */
 .grid-layer {
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200vw;
-    height: 200vh;
+    top: -25%;
+    left: -25%;
+    width: 150vw;
+    height: 150vh;
     background-image:
-        linear-gradient(rgba(15, 23, 42, 0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
-    background-size: 50px 50px;
-    perspective: 500px;
-    transform-style: preserve-3d;
-    opacity: 0.5;
-    mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
-    -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+        linear-gradient(rgba(15, 23, 42, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.4;
+    mask-image: radial-gradient(circle at center, black 30%, transparent 70%);
+    -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 70%);
 }
 
 /* Light Sweep Overlay */
@@ -142,7 +113,7 @@
     right: 0;
     bottom: 0;
     pointer-events: none;
-    background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.4) 50%, transparent 70%);
+    background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.3) 50%, transparent 70%);
     background-size: 200% 200%;
     opacity: 0;
     mix-blend-mode: soft-light;
@@ -157,4 +128,31 @@
     height: 100%;
     pointer-events: none;
     background: radial-gradient(circle at center, transparent 0%, var(--bg-color) 100%);
+}
+
+/* ==============================
+   MOBILE: Further reduce background complexity
+   ============================== */
+@media (max-width: 768px) {
+    .gradient-blob {
+        filter: blur(35px);
+        opacity: 0.2;
+    }
+
+    .blob-1 { width: 250px; height: 250px; }
+    .blob-2 { width: 200px; height: 200px; }
+    .blob-3 { width: 180px; height: 180px; }
+
+    .grid-layer {
+        top: -10%;
+        left: -10%;
+        width: 120vw;
+        height: 120vh;
+        background-size: 70px 70px;
+        opacity: 0.3;
+    }
+
+    .noise-overlay {
+        opacity: 0.02;
+    }
 }
