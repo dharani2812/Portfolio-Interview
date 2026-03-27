@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import Lenis from 'lenis';
-import 'lenis/dist/lenis.css';
 
 const isTouchDevice = () => {
     if (typeof window === 'undefined') return false;
@@ -16,11 +15,17 @@ const ScrollProvider = ({ children }) => {
     const rafIdRef = useRef(null);
 
     useEffect(() => {
-        // Skip Lenis entirely on touch/mobile devices
-        // Let the browser handle native touch scrolling (much smoother on low-end phones)
+        // On touch/mobile devices: skip Lenis entirely and ensure native scrolling works
         if (isTouchDevice()) {
+            // Force-enable native scrolling (undo any Lenis CSS side effects)
+            document.documentElement.style.overflowY = 'auto';
+            document.body.style.overflowY = 'auto';
+            document.documentElement.classList.remove('lenis', 'lenis-smooth', 'lenis-stopped');
             return;
         }
+
+        // Desktop only: import Lenis CSS and initialize
+        import('lenis/dist/lenis.css');
 
         const lenis = new Lenis({
             lerp: 0.1,
