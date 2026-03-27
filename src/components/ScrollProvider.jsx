@@ -1,43 +1,35 @@
 import React, { useEffect, useRef } from 'react';
 import Lenis from 'lenis';
-
-const isTouchDevice = () => {
-    if (typeof window === 'undefined') return false;
-    return (
-        'ontouchstart' in window ||
-        navigator.maxTouchPoints > 0 ||
-        window.matchMedia('(pointer: coarse)').matches
-    );
-};
+import 'lenis/dist/lenis.css';
 
 const ScrollProvider = ({ children }) => {
     const lenisRef = useRef(null);
     const rafIdRef = useRef(null);
 
     useEffect(() => {
-        // On touch/mobile devices: skip Lenis entirely and ensure native scrolling works
-        if (isTouchDevice()) {
-            // Force-enable native scrolling (undo any Lenis CSS side effects)
-            document.documentElement.style.overflowY = 'auto';
-            document.body.style.overflowY = 'auto';
-            document.documentElement.classList.remove('lenis', 'lenis-smooth', 'lenis-stopped');
-            return;
-        }
-
-        // Desktop only: import Lenis CSS and initialize
-        import('lenis/dist/lenis.css');
+        // Guarantee native touch scrolling works everywhere
+        document.documentElement.style.touchAction = 'pan-y';
+        document.body.style.touchAction = 'pan-y';
+        document.documentElement.style.overflowY = 'auto';
+        document.body.style.overflowY = 'auto';
 
         const lenis = new Lenis({
             lerp: 0.1,
             duration: 1.2,
             orientation: 'vertical',
             gestureOrientation: 'vertical',
+            // Only smooth the mouse wheel — touch is left to the browser
             smoothWheel: true,
             wheelMultiplier: 1,
             smoothTouch: false,
             syncTouch: false,
             infinite: false,
             autoResize: true,
+            // Prevent Lenis from calling preventDefault on touch events
+            prevent: (node) => {
+                // Never intercept touch on any element
+                return false;
+            },
         });
 
         lenisRef.current = lenis;
