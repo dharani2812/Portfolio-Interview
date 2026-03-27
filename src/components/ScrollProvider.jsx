@@ -2,22 +2,33 @@ import React, { useEffect, useRef } from 'react';
 import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
 
+const isTouchDevice = () => {
+    if (typeof window === 'undefined') return false;
+    return (
+        'ontouchstart' in window ||
+        navigator.maxTouchPoints > 0 ||
+        window.matchMedia('(pointer: coarse)').matches
+    );
+};
+
 const ScrollProvider = ({ children }) => {
     const lenisRef = useRef(null);
     const rafIdRef = useRef(null);
 
     useEffect(() => {
+        // Skip Lenis entirely on touch/mobile devices
+        // Let the browser handle native touch scrolling (much smoother on low-end phones)
+        if (isTouchDevice()) {
+            return;
+        }
+
         const lenis = new Lenis({
-            // Slightly higher lerp = faster settling = less CPU per frame
             lerp: 0.1,
             duration: 1.2,
             orientation: 'vertical',
             gestureOrientation: 'vertical',
-            // Desktop: smooth wheel only
             smoothWheel: true,
             wheelMultiplier: 1,
-            // Mobile: let the browser handle touch natively
-            // This is MUCH lighter on low-end phones than Lenis touch processing
             smoothTouch: false,
             syncTouch: false,
             infinite: false,
