@@ -12,7 +12,7 @@ import App from './App.jsx'
 if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
   const fixTouchAction = (node) => {
     if (node.nodeType === 1 && node.style.touchAction === 'none') {
-      node.style.touchAction = 'pan-y';
+      node.style.touchAction = ''; // Strip the inline style completely
     }
   };
 
