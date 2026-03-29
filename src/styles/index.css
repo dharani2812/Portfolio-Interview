@@ -124,6 +124,22 @@ body {
 }
 
 /* ==============================
+   MOBILE SCROLL FIX
+   Ensures touch scrolling works everywhere,
+   not just the navbar area.
+   Forces all sections, containers, and
+   framer-motion wrappers to allow vertical pan.
+   ============================== */
+@media (max-width: 768px) {
+  *,
+  *::before,
+  *::after {
+    touch-action: pan-y !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+}
+
+/* ==============================
    REDUCED MOTION — respects user/OS preference
    ============================== */
 @media (prefers-reduced-motion: reduce) {
