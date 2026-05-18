@@ -1,0 +1,399 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 1.5rem 2rem;
+    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s cubic-bezier(0.4, 0, 0.2, 1), backdrop-filter 0.3s ease;
+}
+
+.navbar.scrolled {
+    padding: 1rem 2rem;
+}
+
+.navbar-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Logo */
+.navbar-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1001;
+    cursor: pointer;
+}
+
+.quantum-core-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    position: relative;
+    cursor: pointer;
+    perspective: 800px;
+}
+
+.qc-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.qc-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: rgba(79, 70, 229, 0.4);
+    border-bottom-color: rgba(6, 182, 212, 0.4);
+    box-sizing: border-box;
+    will-change: transform, border-color;
+}
+
+.qc-ring-1 {
+    width: 100%;
+    height: 100%;
+    border-width: 2px;
+}
+
+.qc-ring-2 {
+    width: 75%;
+    height: 75%;
+    border-top-color: rgba(139, 92, 246, 0.5);
+    border-bottom-color: rgba(56, 189, 248, 0.5);
+    border-width: 1.5px;
+}
+
+.qc-ring-3 {
+    width: 50%;
+    height: 50%;
+    border-top-color: rgba(6, 182, 212, 0.6);
+    border-bottom-color: rgba(168, 85, 247, 0.6);
+    border-width: 1px;
+}
+
+.qc-core {
+    width: 8px;
+    height: 8px;
+    background: var(--text-main);
+    border-radius: 50%;
+    position: absolute;
+    z-index: 10;
+    box-shadow: 0 0 10px 2px rgba(79, 70, 229, 0.3);
+    will-change: transform, opacity, box-shadow, background;
+}
+
+/* Center Menu Glass Pill */
+.navbar-menu-desktop {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.glass-pill {
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 0.6rem 2rem;
+    /* Increased horizontal padding */
+    border-radius: 100px;
+    display: flex;
+    gap: 2rem;
+    /* Increased gap */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+}
+
+.navbar.scrolled .glass-pill {
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.nav-link {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 0.3rem 0.6rem;
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+/* Subtle Vertical Divider */
+.nav-link:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: -1rem;
+    /* Exactly half of the 2rem gap */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 0.8rem;
+    background: rgba(15, 23, 42, 0.1);
+}
+
+/* Link Text Gradient Effect */
+.nav-link-text {
+    background: linear-gradient(90deg, #4f46e5, #06b6d4);
+    background-size: 200% auto;
+    background-position: 100% 0;
+    /* Hidden initially */
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: var(--text-secondary);
+    /* Fallback */
+
+    /* Trick to show solid color initially */
+    /* We use a solid overlay or just manage via background-position */
+    -webkit-text-fill-color: var(--text-secondary);
+    transition: background-position 0.4s ease, -webkit-text-fill-color 0.4s ease;
+}
+
+.nav-link:hover .nav-link-text {
+    -webkit-text-fill-color: transparent;
+    background-position: 0 0;
+}
+
+/* Active Link State */
+.nav-link.active .nav-link-text {
+    -webkit-text-fill-color: transparent;
+    background-position: 0 0;
+}
+
+/* Animated Underline */
+.nav-link-underline {
+    position: absolute;
+    bottom: 0;
+    left: 0.6rem;
+    /* Match padding */
+    width: 0;
+    height: 1.5px;
+    background: #4f46e5;
+    transition: width 0.3s ease-out;
+    border-radius: 2px;
+}
+
+.nav-link:hover .nav-link-underline {
+    width: calc(100% - 1.2rem);
+    left: 0.6rem;
+}
+
+/* Active Underline/Dot */
+.nav-link.active .nav-link-underline {
+    width: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -2px;
+}
+
+/* Right Side Contact Button */
+.btn-contact {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--accent-indigo);
+    text-decoration: none;
+    padding: 0.6rem 1.5rem;
+    border: 1px solid var(--accent-indigo);
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-contact:hover {
+    background: rgba(79, 70, 229, 0.05);
+    transform: translateY(-2px);
+}
+
+/* Mobile Toggle */
+.navbar-mobile-toggle {
+    display: none;
+    z-index: 1001;
+}
+
+.navbar-mobile-toggle button {
+    background: none;
+    border: none;
+    color: var(--text-main);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Mobile Menu Panel */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(15, 23, 42, 0.35);
+    /* Subtle deep slate tint */
+    backdrop-filter: blur(28px);
+    /* Massive Vision OS style cinematic blur */
+    -webkit-backdrop-filter: blur(28px);
+    z-index: 999;
+
+    /* Center the white card in the middle of the screen */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    /* Prevent orbs from spilling out of the screen */
+}
+
+/* Hologram Orbs placed behind the glass card */
+.hologram-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    /* Massive blur for smooth glow */
+    z-index: 0;
+    opacity: 0.6;
+    animation: orbFloat 8s infinite alternate ease-in-out;
+}
+
+.orb-1 {
+    width: 250px;
+    height: 250px;
+    background: #4f46e5;
+    /* Indigo */
+    top: 50%;
+    left: 50%;
+    transform: translate(-90%, -90%);
+}
+
+.orb-2 {
+    width: 220px;
+    height: 220px;
+    background: #06b6d4;
+    /* Cyan */
+    top: 50%;
+    left: 50%;
+    transform: translate(-10%, -10%);
+    animation-delay: -4s;
+    animation-duration: 10s;
+}
+
+@keyframes orbFloat {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    100% {
+        transform: translate(-30%, -70%) scale(1.2);
+    }
+}
+
+.mobile-menu-glass {
+    position: relative;
+    z-index: 1;
+    /* Above the orbs */
+    background: rgba(255, 255, 255, 0.65);
+    /* Semi-transparent frosted white glass */
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    /* Subtle inner border to highlight the glass edge */
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 1.5rem;
+    padding: 2.5rem 2rem 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06), 0 4px 6px rgba(0, 0, 0, 0.02);
+}
+
+.mobile-nav-link {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #475569;
+    /* Slate 600 */
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.mobile-nav-link.active,
+.mobile-nav-link:active {
+    color: #4f46e5;
+    /* Indigo 600 */
+}
+
+.mobile-btn-contact {
+    width: 100%;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 0.5rem;
+    background: #4f46e5;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 0.75rem;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.mobile-btn-contact:hover {
+    background: #4338ca;
+    transform: translateY(-2px);
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 900px) {
+    .navbar {
+        padding: 1rem 1.5rem;
+    }
+
+    .navbar.scrolled {
+        padding: 0.75rem 1.5rem;
+    }
+
+    .navbar-menu-desktop,
+    .navbar-actions-desktop {
+        display: none;
+    }
+
+    .navbar-mobile-toggle {
+        display: block;
+    }
+
+    /* Disable gradient text on mobile as requested */
+    .mobile-nav-link:hover {
+        background: none;
+        -webkit-text-fill-color: var(--accent-indigo);
+        color: var(--accent-indigo);
+    }
+
+    .mobile-menu-overlay {
+        padding: 1.5rem;
+        /* Keep card away from screen edges */
+    }
+
+    .mobile-menu-glass {
+        width: 100%;
+        max-width: 380px;
+        margin: 0 auto;
+    }
+}

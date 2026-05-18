@@ -1,0 +1,456 @@
+commit 911b3f661659fb233aa5eddd1d3a0acaedf5db4d
+Author: Dharani Dharan <dharani@example.com>
+Date:   Sun Mar 29 09:01:19 2026 +0530
+
+    Fix mobile scroll issue caused by framer-motion and fixed backgrounds
+
+diff --git a/src/main.jsx b/src/main.jsx
+index d91ba14..b829ff2 100644
+--- a/src/main.jsx
++++ b/src/main.jsx
+@@ -3,8 +3,46 @@ import { createRoot } from 'react-dom/client'
+ import './styles/index.css'
+ import App from './App.jsx'
+ 
++// ─── Mobile scroll fix ────────────────────────────────────
++// Framer Motion v12+ sets inline `touch-action: none` on every
++// motion.* element that has whileHover / whileTap / etc.
++// This blocks native touch-scrolling on mobile.
++// The observer below watches the entire DOM and forces
++// touch-action back to "pan-y" whenever Framer sets it.
++if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
++  const fixTouchAction = (node) => {
++    if (node.nodeType === 1 && node.style.touchAction === 'none') {
++      node.style.touchAction = 'pan-y';
++    }
++  };
++
++  const observer = new MutationObserver((mutations) => {
++    for (const m of mutations) {
++      if (m.type === 'attributes' && m.attributeName === 'style') {
++        fixTouchAction(m.target);
++      }
++      if (m.type === 'childList') {
++        m.addedNodes.forEach((n) => {
++          if (n.nodeType === 1) {
++            fixTouchAction(n);
++            n.querySelectorAll?.('[style]').forEach(fixTouchAction);
++          }
++        });
++      }
++    }
++  });
++
++  observer.observe(document.documentElement, {
++    attributes: true,
++    attributeFilter: ['style'],
++    childList: true,
++    subtree: true,
++  });
++}
++
+ createRoot(document.getElementById('root')).render(
+   <StrictMode>
+     <App />
+   </StrictMode>,
+ )
++
+diff --git a/src/styles/index.css b/src/styles/index.css
+index 97475ca..42ca127 100644
+--- a/src/styles/index.css
++++ b/src/styles/index.css
+@@ -123,6 +123,22 @@ body {
+   overscroll-behavior-y: none;
+ }
+ 
++/* ==============================
++   MOBILE SCROLL FIX
++   Ensures touch scrolling works everywhere,
++   not just the navbar area.
++   Forces all sections, containers, and
++   framer-motion wrappers to allow vertical pan.
++   ============================== */
++@media (max-width: 768px) {
++  *,
++  *::before,
++  *::after {
++    touch-action: pan-y !important;
++    -webkit-overflow-scrolling: touch !important;
++  }
++}
++
+ /* ==============================
+    REDUCED MOTION — respects user/OS preference
+    ============================== */
+
+commit 7fc5a7adafbe85cea8011b3ebb84b626ef81e8cf
+Author: Dharani Dharan <dharani@example.com>
+Date:   Fri Mar 27 17:43:26 2026 +0530
+
+    fix: remove Lenis entirely, use native CSS scroll-behavior: smooth - Lenis was intercepting touch events and blocking mobile scrolling - ScrollProvider is now a simple passthrough (no JS scroll library) - Native scroll-behavior: smooth handles anchor navigation - touch-action: pan-y ensures touch scrolling works everywhere
+
+diff --git a/src/components/ScrollProvider.jsx b/src/components/ScrollProvider.jsx
+index 464f76a..36553aa 100644
+--- a/src/components/ScrollProvider.jsx
++++ b/src/components/ScrollProvider.jsx
+@@ -1,70 +1,7 @@
+-import React, { useEffect, useRef } from 'react';
+-import Lenis from 'lenis';
+-import 'lenis/dist/lenis.css';
++import React from 'react';
+ 
++// Native CSS smooth scrolling — no library, no touch interception
+ const ScrollProvider = ({ children }) => {
+-    const lenisRef = useRef(null);
+-    const rafIdRef = useRef(null);
+-
+-    useEffect(() => {
+-        // Guarantee native touch scrolling works everywhere
+-        document.documentElement.style.touchAction = 'pan-y';
+-        document.body.style.touchAction = 'pan-y';
+-        document.documentElement.style.overflowY = 'auto';
+-        document.body.style.overflowY = 'auto';
+-
+-        const lenis = new Lenis({
+-            lerp: 0.1,
+-            duration: 1.2,
+-            orientation: 'vertical',
+-            gestureOrientation: 'vertical',
+-            // Only smooth the mouse wheel — touch is left to the browser
+-            smoothWheel: true,
+-            wheelMultiplier: 1,
+-            smoothTouch: false,
+-            syncTouch: false,
+-            infinite: false,
+-            autoResize: true,
+-            // Prevent Lenis from calling preventDefault on touch events
+-            prevent: (node) => {
+-                // Never intercept touch on any element
+-                return false;
+-            },
+-        });
+-
+-        lenisRef.current = lenis;
+-
+-        function raf(time) {
+-            lenis.raf(time);
+-            rafIdRef.current = requestAnimationFrame(raf);
+-        }
+-
+-        rafIdRef.current = requestAnimationFrame(raf);
+-
+-        // Handle anchor links with smooth scroll
+-        const handleAnchorClick = (e) => {
+-            const target = e.target.closest('a');
+-            if (target && target.hash && target.origin === window.location.origin) {
+-                e.preventDefault();
+-                lenis.scrollTo(target.hash, {
+-                    offset: 0,
+-                    duration: 1.2,
+-                    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+-                });
+-            }
+-        };
+-
+-        window.addEventListener('click', handleAnchorClick);
+-
+-        return () => {
+-            if (rafIdRef.current) {
+-                cancelAnimationFrame(rafIdRef.current);
+-            }
+-            lenis.destroy();
+-            window.removeEventListener('click', handleAnchorClick);
+-        };
+-    }, []);
+-
+     return <>{children}</>;
+ };
+ 
+diff --git a/src/styles/index.css b/src/styles/index.css
+index aa35f2f..97475ca 100644
+--- a/src/styles/index.css
++++ b/src/styles/index.css
+@@ -22,6 +22,7 @@ body {
+   width: 100%;
+   max-width: 100vw;
+   min-height: 100vh;
++  scroll-behavior: smooth;
+   touch-action: pan-y;
+   -webkit-overflow-scrolling: touch;
+ }
+@@ -112,7 +113,7 @@ button {
+ }
+ 
+ /* ==============================
+-   GLOBAL SCROLL — ensure scrollability on all devices
++   SCROLL BEHAVIOR
+    ============================== */
+ html {
+   overscroll-behavior: none;
+@@ -122,20 +123,6 @@ body {
+   overscroll-behavior-y: none;
+ }
+ 
+-/* Force native scrolling on mobile — override any Lenis side effects */
+-@media (pointer: coarse) {
+-  html, body {
+-    overflow-y: auto !important;
+-    -webkit-overflow-scrolling: touch;
+-    scroll-behavior: smooth;
+-  }
+-
+-  /* Remove Lenis classes that may block scroll */
+-  html.lenis-stopped {
+-    overflow: auto !important;
+-  }
+-}
+-
+ /* ==============================
+    REDUCED MOTION — respects user/OS preference
+    ============================== */
+@@ -146,6 +133,10 @@ body {
+     transition-duration: 0.01ms !important;
+   }
+ 
++  html, body {
++    scroll-behavior: auto;
++  }
++
+   .gradient-blob {
+     animation: none !important;
+   }
+
+commit d3a739cf8e98e6f7bc206d13690b64bb6bd603f6
+Author: Dharani Dharan <dharani@example.com>
+Date:   Fri Mar 27 17:29:30 2026 +0530
+
+    fix: guarantee touch scrolling with touch-action pan-y and Lenis prevent callback
+
+diff --git a/src/components/ScrollProvider.jsx b/src/components/ScrollProvider.jsx
+index 0c41c8e..464f76a 100644
+--- a/src/components/ScrollProvider.jsx
++++ b/src/components/ScrollProvider.jsx
+@@ -1,43 +1,35 @@
+ import React, { useEffect, useRef } from 'react';
+ import Lenis from 'lenis';
+-
+-const isTouchDevice = () => {
+-    if (typeof window === 'undefined') return false;
+-    return (
+-        'ontouchstart' in window ||
+-        navigator.maxTouchPoints > 0 ||
+-        window.matchMedia('(pointer: coarse)').matches
+-    );
+-};
++import 'lenis/dist/lenis.css';
+ 
+ const ScrollProvider = ({ children }) => {
+     const lenisRef = useRef(null);
+     const rafIdRef = useRef(null);
+ 
+     useEffect(() => {
+-        // On touch/mobile devices: skip Lenis entirely and ensure native scrolling works
+-        if (isTouchDevice()) {
+-            // Force-enable native scrolling (undo any Lenis CSS side effects)
+-            document.documentElement.style.overflowY = 'auto';
+-            document.body.style.overflowY = 'auto';
+-            document.documentElement.classList.remove('lenis', 'lenis-smooth', 'lenis-stopped');
+-            return;
+-        }
+-
+-        // Desktop only: import Lenis CSS and initialize
+-        import('lenis/dist/lenis.css');
++        // Guarantee native touch scrolling works everywhere
++        document.documentElement.style.touchAction = 'pan-y';
++        document.body.style.touchAction = 'pan-y';
++        document.documentElement.style.overflowY = 'auto';
++        document.body.style.overflowY = 'auto';
+ 
+         const lenis = new Lenis({
+             lerp: 0.1,
+             duration: 1.2,
+             orientation: 'vertical',
+             gestureOrientation: 'vertical',
++            // Only smooth the mouse wheel — touch is left to the browser
+             smoothWheel: true,
+             wheelMultiplier: 1,
+             smoothTouch: false,
+             syncTouch: false,
+             infinite: false,
+             autoResize: true,
++            // Prevent Lenis from calling preventDefault on touch events
++            prevent: (node) => {
++                // Never intercept touch on any element
++                return false;
++            },
+         });
+ 
+         lenisRef.current = lenis;
+diff --git a/src/styles/index.css b/src/styles/index.css
+index bb86a6b..aa35f2f 100644
+--- a/src/styles/index.css
++++ b/src/styles/index.css
+@@ -22,6 +22,8 @@ body {
+   width: 100%;
+   max-width: 100vw;
+   min-height: 100vh;
++  touch-action: pan-y;
++  -webkit-overflow-scrolling: touch;
+ }
+ 
+ h1,
+
+commit dc45df2865f7a7ddc6f947edeec10126b9080d30
+Author: Dharani Dharan <dharani@example.com>
+Date:   Fri Mar 27 17:14:54 2026 +0530
+
+    fix: restore mobile scrolling - conditional Lenis CSS, force overflow-y auto, add pointer:coarse media query
+
+diff --git a/src/components/ScrollProvider.jsx b/src/components/ScrollProvider.jsx
+index 240dd1f..0c41c8e 100644
+--- a/src/components/ScrollProvider.jsx
++++ b/src/components/ScrollProvider.jsx
+@@ -1,6 +1,5 @@
+ import React, { useEffect, useRef } from 'react';
+ import Lenis from 'lenis';
+-import 'lenis/dist/lenis.css';
+ 
+ const isTouchDevice = () => {
+     if (typeof window === 'undefined') return false;
+@@ -16,12 +15,18 @@ const ScrollProvider = ({ children }) => {
+     const rafIdRef = useRef(null);
+ 
+     useEffect(() => {
+-        // Skip Lenis entirely on touch/mobile devices
+-        // Let the browser handle native touch scrolling (much smoother on low-end phones)
++        // On touch/mobile devices: skip Lenis entirely and ensure native scrolling works
+         if (isTouchDevice()) {
++            // Force-enable native scrolling (undo any Lenis CSS side effects)
++            document.documentElement.style.overflowY = 'auto';
++            document.body.style.overflowY = 'auto';
++            document.documentElement.classList.remove('lenis', 'lenis-smooth', 'lenis-stopped');
+             return;
+         }
+ 
++        // Desktop only: import Lenis CSS and initialize
++        import('lenis/dist/lenis.css');
++
+         const lenis = new Lenis({
+             lerp: 0.1,
+             duration: 1.2,
+diff --git a/src/styles/index.css b/src/styles/index.css
+index 859515e..bb86a6b 100644
+--- a/src/styles/index.css
++++ b/src/styles/index.css
+@@ -18,11 +18,10 @@ body {
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+   overflow-x: hidden;
++  overflow-y: auto;
+   width: 100%;
+   max-width: 100vw;
+   min-height: 100vh;
+-  scroll-behavior: auto !important;
+-  /* Managed by Lenis */
+ }
+ 
+ h1,
+@@ -111,17 +110,8 @@ button {
+ }
+ 
+ /* ==============================
+-   GLOBAL SCROLL PERFORMANCE
+-   (Low-end device friendly — no GPU layer promotion)
++   GLOBAL SCROLL — ensure scrollability on all devices
+    ============================== */
+-
+-/* Off-screen sections: defer rendering until near viewport (CPU-friendly) */
+-section:not(:first-of-type) {
+-  content-visibility: auto;
+-  contain-intrinsic-size: auto 600px;
+-}
+-
+-/* Disable overscroll bounce for a tighter scroll feel */
+ html {
+   overscroll-behavior: none;
+ }
+@@ -130,16 +120,28 @@ body {
+   overscroll-behavior-y: none;
+ }
+ 
++/* Force native scrolling on mobile — override any Lenis side effects */
++@media (pointer: coarse) {
++  html, body {
++    overflow-y: auto !important;
++    -webkit-overflow-scrolling: touch;
++    scroll-behavior: smooth;
++  }
++
++  /* Remove Lenis classes that may block scroll */
++  html.lenis-stopped {
++    overflow: auto !important;
++  }
++}
++
+ /* ==============================
+    REDUCED MOTION — respects user/OS preference
+-   Disables ALL animations for low-end or accessibility devices
+    ============================== */
+ @media (prefers-reduced-motion: reduce) {
+   *, *::before, *::after {
+     animation-duration: 0.01ms !important;
+     animation-iteration-count: 1 !important;
+     transition-duration: 0.01ms !important;
+-    scroll-behavior: auto !important;
+   }
+ 
+   .gradient-blob {
+
+commit 086892cfa8063b720cdbbe0d1436e91062ef2839
+Author: Dharani Dharan <dharani@example.com>
+Date:   Fri Mar 27 16:18:50 2026 +0530
+
+    fix: disable Lenis on mobile to restore native touch scrolling
+
+diff --git a/src/components/ScrollProvider.jsx b/src/components/ScrollProvider.jsx
+index fc44c61..240dd1f 100644
+--- a/src/components/ScrollProvider.jsx
++++ b/src/components/ScrollProvider.jsx
+@@ -2,22 +2,33 @@ import React, { useEffect, useRef } from 'react';
+ import Lenis from 'lenis';
+ import 'lenis/dist/lenis.css';
+ 
++const isTouchDevice = () => {
++    if (typeof window === 'undefined') return false;
++    return (
++        'ontouchstart' in window ||
++        navigator.maxTouchPoints > 0 ||
++        window.matchMedia('(pointer: coarse)').matches
++    );
++};
++
+ const ScrollProvider = ({ children }) => {
+     const lenisRef = useRef(null);
+     const rafIdRef = useRef(null);
+ 
+     useEffect(() => {
++        // Skip Lenis entirely on touch/mobile devices
++        // Let the browser handle native touch scrolling (much smoother on low-end phones)
++        if (isTouchDevice()) {
++            return;
++        }
++
+         const lenis = new Lenis({
+-            // Slightly higher lerp = faster settling = less CPU per frame
+             lerp: 0.1,
+             duration: 1.2,
+             orientation: 'vertical',
+             gestureOrientation: 'vertical',
+-            // Desktop: smooth wheel only
+             smoothWheel: true,
+             wheelMultiplier: 1,
+-            // Mobile: let the browser handle touch natively
+-            // This is MUCH lighter on low-end phones than Lenis touch processing
+             smoothTouch: false,
+             syncTouch: false,
+             infinite: false,
